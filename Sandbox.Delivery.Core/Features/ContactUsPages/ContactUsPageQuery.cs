@@ -13,12 +13,10 @@ namespace Sandbox.Delivery.Core.Features.ContactUsPages
     public class ContactUsPageQueryResponse : IPageMetaSource
     {
         public ContactUsPageQueryResponse(
-            int documentId,
             string headerText,
             string pageMetaTitle,
             string pageMetaDescription)
         {
-            DocumentId = documentId;
             HeaderText = headerText ?? "";
             PageMetaTitle = pageMetaTitle ?? "";
             PageMetaDescription = pageMetaDescription ?? "";

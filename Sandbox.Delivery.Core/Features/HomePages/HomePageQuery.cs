@@ -13,14 +13,12 @@ namespace Sandbox.Delivery.Core.Features.HomePages
     public class HomePageQueryResponse : IPageMetaSource
     {
         public HomePageQueryResponse(
-            int documentId,
             string headerText,
             string footerTitle,
             string footerText,
             string pageMetaTitle,
             string pageMetaDescription)
         {
-            DocumentId = documentId;
             HeaderText = headerText ?? "";
             FooterTitle = footerTitle ?? "";
             FooterText = footerText ?? "";
@@ -28,7 +26,6 @@ namespace Sandbox.Delivery.Core.Features.HomePages
             PageMetaDescription = pageMetaDescription ?? "";
         }
 
-        public int DocumentId { get; }
         public string HeaderText { get; }
         public string FooterTitle { get; }
         public string FooterText { get; }

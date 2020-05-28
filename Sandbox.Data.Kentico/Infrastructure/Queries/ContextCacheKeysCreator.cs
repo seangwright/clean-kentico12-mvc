@@ -1,33 +1,22 @@
-﻿using Ardalis.GuardClauses;
-
-namespace Sandbox.Data.Kentico.Infrastructure.Queries
+﻿namespace Sandbox.Data.Kentico.Infrastructure.Queries
 {
-    public abstract class ContextCacheKeysCreator
+    public static class ContextCacheKeysCreator
     {
-        protected readonly IDocumentQueryContext QueryContext;
-
-        public ContextCacheKeysCreator(IDocumentQueryContext queryContext)
-        {
-            Guard.Against.Null(queryContext, nameof(queryContext));
-
-            QueryContext = queryContext;
-        }
-
-        public object[] NamePartsFromQuery(string queryClassName) =>
+        public static object[] NamePartsFromQuery(IDocumentQueryContext context, string queryClassName) =>
             new object[]
             {
                 queryClassName,
-                QueryContext.SiteName,
-                $"preview:{QueryContext.IsPreviewEnabled}"
+                context.SiteName,
+                $"preview:{context.IsPreviewEnabled}"
             };
 
-        public object[] NamePartsFromQuery(string queryClassName, string nodeAliasPath) =>
+        public static object[] NamePartsFromQuery(IDocumentQueryContext context, string queryClassName, object queryValue) =>
             new object[]
             {
                 queryClassName,
-                QueryContext.SiteName,
-                $"preview:{QueryContext.IsPreviewEnabled}",
-                nodeAliasPath
+                context.SiteName,
+                $"preview:{context.IsPreviewEnabled}",
+                queryValue
             };
     }
 }
