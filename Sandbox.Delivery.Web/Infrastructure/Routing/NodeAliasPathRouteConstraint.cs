@@ -2,8 +2,9 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ardalis.GuardClauses;
-using Sandbox.Delivery.Core.Features.Nodes;
 using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
+using Sandbox.Delivery.Core.Features.Documents;
+using Sandbox.Delivery.Web.Infrastructure.Contexts;
 
 namespace Sandbox.Delivery.Web.Infrastructure.Routing
 {
@@ -42,6 +43,18 @@ namespace Sandbox.Delivery.Web.Infrastructure.Routing
             }
         }
 
+        private DocumentContext DocumentContext
+        {
+            get
+            {
+                var context = dependencyResolver.GetService<DocumentContext>();
+
+                Guard.Against.Null(context, nameof(context));
+
+                return context;
+            }
+        }
+
 
         public NodeAliasPathRouteConstraint(IDependencyResolver dependencyResolver)
         {
@@ -52,6 +65,14 @@ namespace Sandbox.Delivery.Web.Infrastructure.Routing
 
         public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
         {
+            /*
+             * Child action request, so the context is already set
+             */
+            if (!string.IsNullOrWhiteSpace(DocumentContext.DocumentClassName))
+            {
+                return true;
+            }
+
             if (!values.TryGetValue(parameterName, out object requestPathObj))
             {
                 return false;
@@ -61,17 +82,29 @@ namespace Sandbox.Delivery.Web.Infrastructure.Routing
                 ? $"/Home"
                 : $"/{requestPathObj}";
 
-            var result = QueryDispatcher.Dispatch(new NodeClassNameByNodeAliasPathQuery(requestPath));
+            var result = QueryDispatcher.Dispatch(new DocumentByNodeAliasPathQuery(requestPath));
 
             if (result.IsFailure)
             {
                 return false;
             }
 
-            if (!ControllerActionMatchProvider.TryFindMatch(result.Value, out var match))
+            var response = result.Value;
+
+            if (!ControllerActionMatchProvider.TryFindMatch(response.DocumentClassName, out var match))
             {
                 return false;
             }
+
+            DocumentContext.SetContext(
+                response.NodeGuid,
+                response.NodeId,
+                response.NodeAliasPath,
+                response.DocumentId,
+                response.DocumentName,
+                response.DocumentClassName,
+                response.DocumentPageTitle,
+                response.DocumentPageDescription);
 
             values["action"] = match.ActionName;
             values["controller"] = match.ControllerName;

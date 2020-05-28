@@ -3,7 +3,6 @@ using CSharpFunctionalExtensions;
 using MediatR;
 using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 using Sandbox.Delivery.Core.Features.HomePages;
-using Sandbox.Delivery.Web.Infrastructure.PageBuilders;
 
 namespace Sandbox.Delivery.Web.Features.Home
 {
@@ -29,7 +28,7 @@ namespace Sandbox.Delivery.Web.Features.Home
 
             var response = result.Value;
 
-            return new HomePageViewModel(response.DocumentId, response.HeaderText);
+            return new HomePageViewModel(response.HeaderText);
         }
     }
 
@@ -40,15 +39,10 @@ namespace Sandbox.Delivery.Web.Features.Home
         public string RequestPath { get; }
     }
 
-    public class HomePageViewModel : IPageBuilderViewModel
+    public class HomePageViewModel
     {
-        public HomePageViewModel(int documentId, string title)
-        {
-            DocumentId = documentId;
-            Title = title ?? "";
-        }
+        public HomePageViewModel(string title) => Title = title ?? "";
 
-        public int DocumentId { get; }
         public string Title { get; }
     }
 }

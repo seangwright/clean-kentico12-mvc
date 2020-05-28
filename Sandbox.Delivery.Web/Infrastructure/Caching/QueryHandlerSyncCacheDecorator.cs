@@ -14,31 +14,32 @@ namespace Sandbox.Delivery.Web.Infrastructure.Caching
         private readonly ICacheHelper cacheHelper;
         private readonly QueryCacheSettings queryCacheSettings;
         private readonly IQueryHandlerSync<TQuery, TResponse> handler;
-        private readonly IQuerySyncCacheKeysCreator<TQuery, TResponse> cacheKeysCreator;
 
         public QueryHandlerSyncCacheDecorator(
             IOutputCacheDependenciesStore cacheKeyStore,
             ICacheHelper cacheHelper,
             QueryCacheSettings queryCacheSettings,
-            IQueryHandlerSync<TQuery, TResponse> handler,
-            IQuerySyncCacheKeysCreator<TQuery, TResponse> cacheKeysCreator)
+            IQueryHandlerSync<TQuery, TResponse> handler)
         {
             Guard.Against.Null(cacheKeyStore, nameof(cacheKeyStore));
             Guard.Against.Null(queryCacheSettings, nameof(queryCacheSettings));
             Guard.Against.Null(handler, nameof(handler));
-            Guard.Against.Null(cacheKeysCreator, nameof(cacheKeysCreator));
             Guard.Against.Null(cacheHelper, nameof(cacheHelper));
 
             this.cacheKeyStore = cacheKeyStore;
             this.cacheHelper = cacheHelper;
             this.queryCacheSettings = queryCacheSettings;
             this.handler = handler;
-            this.cacheKeysCreator = cacheKeysCreator;
         }
 
         public Result<TResponse> Execute(TQuery query)
         {
             if (!queryCacheSettings.IsEnabled)
+            {
+                return handler.Execute(query);
+            }
+
+            if (!(handler is IQuerySyncCacheKeysCreator<TQuery, TResponse> cacheKeysCreator))
             {
                 return handler.Execute(query);
             }

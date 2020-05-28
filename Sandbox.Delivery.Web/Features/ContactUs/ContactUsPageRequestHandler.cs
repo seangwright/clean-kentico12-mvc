@@ -3,7 +3,6 @@ using CSharpFunctionalExtensions;
 using MediatR;
 using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 using Sandbox.Delivery.Core.Features.ContactUsPages;
-using Sandbox.Delivery.Web.Infrastructure.PageBuilders;
 
 namespace Sandbox.Delivery.Web.Features.ContactUs
 {
@@ -29,7 +28,7 @@ namespace Sandbox.Delivery.Web.Features.ContactUs
 
             var response = result.Value;
 
-            return new ContactUsPageViewModel(response.DocumentId, response.HeaderText);
+            return new ContactUsPageViewModel(response.HeaderText);
         }
     }
 
@@ -40,15 +39,10 @@ namespace Sandbox.Delivery.Web.Features.ContactUs
         public string RequestPath { get; }
     }
 
-    public class ContactUsPageViewModel : IPageBuilderViewModel
+    public class ContactUsPageViewModel
     {
-        public ContactUsPageViewModel(int documentId, string title)
-        {
-            DocumentId = documentId;
-            Title = title ?? "";
-        }
+        public ContactUsPageViewModel(string title) => Title = title ?? "";
 
-        public int DocumentId { get; }
         public string Title { get; }
     }
 }

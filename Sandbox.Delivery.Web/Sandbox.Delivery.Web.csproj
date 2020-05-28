@@ -70,6 +70,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Dependencies\DependencyResolverConfig.cs" />
+    <Compile Include="Configuration\Dependencies\KenticoRegistrationSource.cs" />
+    <Compile Include="Configuration\Pipelines\ApplicationConfig.cs" />
     <Compile Include="Configuration\Pipelines\BundleConfig.cs" />
     <Compile Include="Configuration\Pipelines\FilterConfig.cs" />
     <Compile Include="Configuration\Pipelines\RouteConfig.cs" />
@@ -85,12 +88,17 @@
     <Compile Include="Infrastructure\Caching\OutputCacheDependenciesStore.cs" />
     <Compile Include="Infrastructure\Caching\QueryCacheSettings.cs" />
     <Compile Include="Infrastructure\Caching\QueryHandlerSyncCacheDecorator.cs" />
+    <Compile Include="Infrastructure\Contexts\DocumentContext.cs" />
     <Compile Include="Infrastructure\Contexts\HttpContextBaseAccessor.cs" />
     <Compile Include="Infrastructure\Logging\QueryHandlerSyncLogDecorator.cs" />
-    <Compile Include="Infrastructure\PageBuilders\IPageBuilderViewModel.cs" />
     <Compile Include="Infrastructure\PageBuilders\PageBuilderInitializer.cs" />
     <Compile Include="Infrastructure\PageBuilders\PreviewContext.cs" />
-    <Compile Include="Infrastructure\PageBuilders\RequestHandlerPageBuilderDecorator.cs" />
+    <Compile Include="Infrastructure\PageBuilders\PageBuilderInitializerDecorator.cs" />
+    <Compile Include="Infrastructure\PageMeta\PageMetaService.cs" />
+    <Compile Include="Infrastructure\PageMeta\PageMetaStandardizer.cs" />
+    <Compile Include="Infrastructure\PageMeta\PageMeta.cs" />
+    <Compile Include="Infrastructure\PageMeta\PageMetaActionFilterAttribute.cs" />
+    <Compile Include="Infrastructure\PageMeta\QueryHandlerSyncPageMetaDecorator.cs" />
     <Compile Include="Infrastructure\Routing\ControllerActionMatchProvider.cs" />
     <Compile Include="Infrastructure\Routing\ControllerNameExtensions.cs" />
     <Compile Include="Infrastructure\Routing\NodeAliasPathRouteConstraint.cs" />
@@ -220,11 +228,9 @@
     <Content Include="Views\Home\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Configuration\Dependencies\" />
     <Folder Include="Content\" />
     <Folder Include="Features\CompanyProfile\" />
     <Folder Include="Infrastructure\ErrorHandling\" />
-    <Folder Include="Infrastructure\PageMeta\" />
     <Folder Include="Scripts\" />
     <Folder Include="Views\Shared\Assets\" />
   </ItemGroup>
