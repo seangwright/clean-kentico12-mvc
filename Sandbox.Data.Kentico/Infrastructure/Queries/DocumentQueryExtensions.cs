@@ -17,5 +17,11 @@ namespace Sandbox.Data.Kentico.Infrastructure.Queries
                 .Published(!context.IsPreviewEnabled)
                 .OnSite(context.SiteName)
                 .CombineWithDefaultCulture();
+
+        public static MultiDocumentQuery GetLatestSiteDocuments(this MultiDocumentQuery query, IDocumentQueryContext context) =>
+            query.LatestVersion(context.IsPreviewEnabled)
+                .Published(!context.IsPreviewEnabled)
+                .OnSite(context.SiteName)
+                .CombineWithDefaultCulture();
     }
 }

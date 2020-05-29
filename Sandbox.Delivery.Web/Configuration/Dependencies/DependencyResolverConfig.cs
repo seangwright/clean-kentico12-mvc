@@ -16,8 +16,6 @@ namespace Sandbox.Delivery.Web.Configuration.Dependencies
                 .RegisterMvcTypes()
                 .RegisterCmsTypes()
                 .RegisterApiTypes()
-                .RegisterAuthTypes()
-                .RegisterEcommerceTypes()
                 .Build();
 
             return container;

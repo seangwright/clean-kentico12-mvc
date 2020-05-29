@@ -70,12 +70,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Dependencies\ApplicationRegistration.cs" />
     <Compile Include="Configuration\Dependencies\DependencyResolverConfig.cs" />
     <Compile Include="Configuration\Dependencies\KenticoRegistrationSource.cs" />
+    <Compile Include="Configuration\Dependencies\MvcRegistration.cs" />
     <Compile Include="Configuration\Pipelines\ApplicationConfig.cs" />
     <Compile Include="Configuration\Pipelines\BundleConfig.cs" />
     <Compile Include="Configuration\Pipelines\FilterConfig.cs" />
     <Compile Include="Configuration\Pipelines\RouteConfig.cs" />
+    <Compile Include="Configuration\Pipelines\SwaggerNetConfig.cs" />
     <Compile Include="Configuration\Pipelines\WebApiConfig.cs" />
     <Compile Include="Features\ContactUs\ContactUsController.cs" />
     <Compile Include="Features\ContactUs\ContactUsPageRequestHandler.cs" />
@@ -99,10 +102,13 @@
     <Compile Include="Infrastructure\PageMeta\PageMeta.cs" />
     <Compile Include="Infrastructure\PageMeta\PageMetaActionFilterAttribute.cs" />
     <Compile Include="Infrastructure\Requests\BaseController.cs" />
+    <Compile Include="Infrastructure\Routing\ApiBaseDirectRouteProvider.cs" />
     <Compile Include="Infrastructure\Routing\ControllerActionMatchProvider.cs" />
     <Compile Include="Infrastructure\Routing\ControllerNameExtensions.cs" />
     <Compile Include="Infrastructure\Routing\NodeAliasPathRouteConstraint.cs" />
     <Compile Include="Infrastructure\Routing\PageTypeRouteAttribute.cs" />
+    <Compile Include="Infrastructure\Serialization\JsonDotNetValueProviderFactory.cs" />
+    <Compile Include="Infrastructure\URLs\URLBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Views\Shared\ViewHelpers\HttpContextBaseExtensions.cs" />
@@ -239,8 +245,17 @@
     <PackageReference Include="Autofac.Mvc5">
       <Version>5.0.0</Version>
     </PackageReference>
+    <PackageReference Include="Autofac.WebApi2">
+      <Version>5.0.0</Version>
+    </PackageReference>
     <PackageReference Include="CSharpFunctionalExtensions">
       <Version>2.8.0</Version>
+    </PackageReference>
+    <PackageReference Include="FluentValidation">
+      <Version>8.6.2</Version>
+    </PackageReference>
+    <PackageReference Include="FluentValidation.WebApi">
+      <Version>8.6.1</Version>
     </PackageReference>
     <PackageReference Include="Kentico.AspNet.Mvc">
       <Version>12.0.70</Version>
@@ -259,6 +274,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
       <Version>2.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Swagger-Net">
+      <Version>8.3.25.401</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -290,6 +308,10 @@
     <ProjectReference Include="..\Sandbox.Core.Domain\Sandbox.Core.Domain.csproj">
       <Project>{40A67BEB-619C-46DF-97EB-55D8D557AE98}</Project>
       <Name>Sandbox.Core.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sandbox.Delivery.Data\Sandbox.Delivery.Data.csproj">
+      <Project>{33DE9864-0254-4C9F-AD26-6239D342CBD5}</Project>
+      <Name>Sandbox.Delivery.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
