@@ -1,6 +1,6 @@
 ﻿using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 
-namespace Sandbox.Delivery.Core.Features.MarketingTagContents
+namespace Sandbox.Delivery.Core.Features.MarketingTagsContents
 {
     public class MarketingTagsContentQuery : IQuerySync<MarketingTagsQueryResponse>
     {

@@ -1,8 +1,7 @@
 ﻿using System.Reflection;
-using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
-using Sandbox.Delivery.Web.Infrastructure.PageMeta;
+using Sandbox.Delivery.Web.Features.PageMetas;
 using Sandbox.Delivery.Web.Infrastructure.Routing;
 using Sandbox.Delivery.Web.Infrastructure.URLs;
 
@@ -42,12 +41,6 @@ namespace Sandbox.Delivery.Web.Configuration.Dependencies
                 .RegisterType<PageMetaService<PageMeta>>()
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
-
-            builder
-                .RegisterType<PageMetaActionFilterAttribute>()
-                .AsActionFilterFor<Controller>()
-                .InstancePerRequest()
-                .PropertiesAutowired();
 
             return builder;
         }

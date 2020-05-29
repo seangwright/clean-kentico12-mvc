@@ -11,8 +11,6 @@ namespace Sandbox.Delivery.Data.Features.HomePages
         IQueryHandlerSync<HomePageQuery, HomePageQueryResponse>,
         IQuerySyncCacheKeysCreator<HomePageQuery, HomePageQueryResponse>
     {
-        private readonly IDocumentQueryContext context;
-
         public HomePageQueryHandler(IDocumentQueryContext context) : base(context) { }
 
         public Result<HomePageQueryResponse> Execute(HomePageQuery query)
@@ -33,7 +31,7 @@ namespace Sandbox.Delivery.Data.Features.HomePages
         }
 
         public string[] DependencyKeys(HomePageQuery query, Result<HomePageQueryResponse> result) =>
-            new[] { FluentCacheKey.ForPage().OfSite(context.SiteName).WithAliasPath(query.NodeAliasPath) };
+            new[] { FluentCacheKey.ForPage().OfSite(Context.SiteName).WithAliasPath(query.NodeAliasPath) };
 
         public object[] ItemNameParts(HomePageQuery query) => ItemNameParts(nameof(HomePageQuery), query.NodeAliasPath);
     }

@@ -7,6 +7,8 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using FluentValidation;
 using FluentValidation.WebApi;
+using Sandbox.Delivery.Web.Configuration.Pipelines;
+using Sandbox.Delivery.Web.Infrastructure.ErrorHandling;
 using Sandbox.Delivery.Web.Infrastructure.Routing;
 
 namespace Sandbox.Delivery.Web

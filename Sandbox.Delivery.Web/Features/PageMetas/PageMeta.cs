@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ardalis.GuardClauses;
 
-namespace Sandbox.Delivery.Web.Features.PageMeta
+namespace Sandbox.Delivery.Web.Features.PageMetas
 {
     public interface IPageMeta
     {

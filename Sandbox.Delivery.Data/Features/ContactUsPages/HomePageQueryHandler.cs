@@ -11,8 +11,6 @@ namespace Sandbox.Delivery.Data.Features.ContactUsPages
         IQueryHandlerSync<ContactUsPageQuery, ContactUsPageQueryResponse>,
         IQuerySyncCacheKeysCreator<ContactUsPageQuery, ContactUsPageQueryResponse>
     {
-        private readonly IDocumentQueryContext context;
-
         public ContactUsPageQueryHandler(IDocumentQueryContext context) : base(context) { }
 
         public Result<ContactUsPageQueryResponse> Execute(ContactUsPageQuery query)
@@ -30,7 +28,7 @@ namespace Sandbox.Delivery.Data.Features.ContactUsPages
         }
 
         public string[] DependencyKeys(ContactUsPageQuery query, Result<ContactUsPageQueryResponse> result) =>
-            new[] { FluentCacheKey.ForPage().OfSite(context.SiteName).WithAliasPath(query.NodeAliasPath) };
+            new[] { FluentCacheKey.ForPage().OfSite(Context.SiteName).WithAliasPath(query.NodeAliasPath) };
 
         public object[] ItemNameParts(ContactUsPageQuery query) => ItemNameParts(nameof(ContactUsPageQuery), query.NodeAliasPath);
     }
