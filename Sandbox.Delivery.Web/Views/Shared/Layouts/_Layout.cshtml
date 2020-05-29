@@ -2,29 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @{ Html.RenderPartial("_SiteMeta", siteMeta); }
-
-    @{ Html.RenderPartial("Assets/_PreLoad"); }
-
-    @{ Html.RenderPartial("Assets/_Styles"); }
+    @{ Html.RenderPartial("Layouts/_Head"); }
 
     @RenderSection("styles", required: false)
-
-    @if (Context.IsEditMode())
-    {
-        @Html.Kentico().PageBuilderStyles()
-    }
-
-    @if (!Context.IsEditMode())
-    {
-        @Html.Raw(marketingTags.HeaderElementTags)
-    }
 </head>
 <body>
-    @if (!Context.IsEditMode())
-    {
-        @Html.Raw(marketingTags.AfterBodyStartTags)
-    }
+    @{ Html.RenderPartial("Layouts/_BodyStart"); }
 
     @{ Html.RenderAction("Primary", "Navigation"); }
 
@@ -32,9 +15,10 @@
 
     @{ Html.RenderAction("Footer", "Navigation"); }
 
+    @{ Html.RenderPartial("Layouts/_BodyEnd"); }
+
     @{ Html.RenderPartial("Assets/_Scripts"); }
 
-    @RenderSection("scripts", required: false)
 
     @if (Context.IsEditMode())
     {
@@ -45,5 +29,7 @@
     {
         @Html.Raw(marketingTags.BeforeBodyEndTags)
     }
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>

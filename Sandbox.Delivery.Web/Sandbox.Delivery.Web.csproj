@@ -98,7 +98,7 @@
     <Compile Include="Infrastructure\PageMeta\PageMetaStandardizer.cs" />
     <Compile Include="Infrastructure\PageMeta\PageMeta.cs" />
     <Compile Include="Infrastructure\PageMeta\PageMetaActionFilterAttribute.cs" />
-    <Compile Include="Infrastructure\PageMeta\QueryHandlerSyncPageMetaDecorator.cs" />
+    <Compile Include="Infrastructure\Requests\BaseController.cs" />
     <Compile Include="Infrastructure\Routing\ControllerActionMatchProvider.cs" />
     <Compile Include="Infrastructure\Routing\ControllerNameExtensions.cs" />
     <Compile Include="Infrastructure\Routing\NodeAliasPathRouteConstraint.cs" />
@@ -106,6 +106,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Views\Shared\ViewHelpers\HttpContextBaseExtensions.cs" />
+    <Compile Include="Views\Shared\ViewHelpers\KenticoWebViewPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -224,15 +225,12 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Layouts\_Layout.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
-    <Folder Include="Features\CompanyProfile\" />
-    <Folder Include="Infrastructure\ErrorHandling\" />
-    <Folder Include="Scripts\" />
-    <Folder Include="Views\Shared\Assets\" />
+    <Folder Include="Infrastructure\ErrorHandling\NotFound\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses">
@@ -296,6 +294,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ContactUs\ContactUs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Layouts\_Head.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Layouts\_BodyStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Layouts\_BodyEnd.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Layouts\Assets\_PreLoad.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Layouts\Assets\_Scripts.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Layouts\Assets\_Styles.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,18 @@
+﻿@using Sandbox.Delivery.Web.Infrastructure.PageMeta
+
+@{
+    var pageMeta = ViewBag.Meta as PageMeta;
+
+    Html.RenderPartial("Layouts/_SiteMeta", pageMeta);
+    Html.RenderPartial("Layouts/Assets/_PreLoad");
+    Html.RenderPartial("Layouts/Assets/_Styles");
+
+    if (IsEditMode)
+    {
+        @Html.Kentico().PageBuilderStyles()
+    }
+    else if (IsLiveMode)
+    {
+        Html.RenderAction("Header", "MarketingTags");
+    }
+}

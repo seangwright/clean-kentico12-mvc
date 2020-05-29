@@ -2,7 +2,7 @@
 using Ardalis.GuardClauses;
 using CMS.DocumentEngine;
 using CSharpFunctionalExtensions;
-
+using Sandbox.Core.Domain.Infrastructure.Operations.Queries;
 using static Sandbox.Data.Kentico.Infrastructure.Queries.ContextCacheKeysCreator;
 
 namespace Sandbox.Data.Kentico.Infrastructure.Queries
@@ -26,16 +26,17 @@ namespace Sandbox.Data.Kentico.Infrastructure.Queries
         /// <param name="documentQuery"></param>
         /// <param name="nodeAliasPath"></param>
         /// <returns></returns>
-        protected Result<TDocument> GetFirstPageWithNodeAliasPath(DocumentQuery<TDocument> documentQuery, string nodeAliasPath)
+        protected Result<TDocument> GetFirstPageWithNodeAliasPath(DocumentQuery<TDocument> documentQuery, NodeAliasPathQuery query)
         {
             var page = documentQuery
                 .GetLatestSiteDocuments(Context)
+                .Path(query.NodeAliasPath, PathTypeEnum.Explicit)
                 .TopN(1)
                 .FirstOrDefault();
 
             if (page is null)
             {
-                return Result.Failure<TDocument>($"Could not find {documentQuery.ClassName} page at [{nodeAliasPath}]");
+                return Result.Failure<TDocument>($"Could not find {documentQuery.ClassName} page at [{query.NodeAliasPath}]");
             }
 
             return Result.Success(page);

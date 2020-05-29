@@ -2,32 +2,43 @@
 using System.Linq;
 using Ardalis.GuardClauses;
 using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
+using Sandbox.Delivery.Core.Features.MarketingTagContents;
+using Sandbox.Delivery.Web.Infrastructure.Contexts;
 
 namespace Sandbox.Delivery.Web.Infrastructure.PageMeta
 {
     public interface IPageMetaStandardizer<TSiteMeta> where TSiteMeta : IPageMeta
     {
-        TSiteMeta Standardize(TSiteMeta siteMeta);
+        TSiteMeta Standardize(TSiteMeta pageMeta);
     }
 
     public class PageMetaStandardizer : IPageMetaStandardizer<PageMeta>
     {
         private readonly IQueryDispatcher dispatcher;
+        private readonly IDocumentContext context;
 
-        public PageMetaStandardizer(IQueryDispatcher dispatcher)
+        public PageMetaStandardizer(IQueryDispatcher dispatcher, IDocumentContext context)
         {
             Guard.Against.Null(dispatcher, nameof(dispatcher));
+            Guard.Against.Null(context, nameof(context));
 
             this.dispatcher = dispatcher;
+            this.context = context;
         }
 
-        public PageMeta Standardize(PageMeta siteMeta)
+        public PageMeta Standardize(PageMeta pageMeta)
         {
+            if (pageMeta is null)
+            {
+                pageMeta = new PageMeta(context.DocumentPageTitle);
+                pageMeta.SetDescription(context.DocumentPageDescription);
+            }
+
             var result = dispatcher.Dispatch(new MarketingTagsContentQuery());
 
             if (result.IsFailure)
             {
-                return siteMeta;
+                return pageMeta;
             }
 
             var response = result.Value;
@@ -39,30 +50,30 @@ namespace Sandbox.Delivery.Web.Infrastructure.PageMeta
                 { PageMeta.TwitterSite, response.DefaultTwitterSite }
             };
 
-            if (siteMeta is null)
+            if (pageMeta is null)
             {
                 return new PageMeta(response.PageTitleSuffix, defaultMeta);
             }
 
             foreach (var meta in defaultMeta)
             {
-                if (!siteMeta.Metas.ContainsKey(meta.Key))
+                if (!pageMeta.Metas.ContainsKey(meta.Key))
                 {
-                    siteMeta.AddMeta(meta.Key, meta.Value);
+                    pageMeta.AddMeta(meta.Key, meta.Value);
                 }
             }
 
-            string title = string.IsNullOrWhiteSpace(siteMeta.Title)
+            string title = string.IsNullOrWhiteSpace(pageMeta.Title)
                 ? response.PageTitleSuffix
-                : $"{siteMeta.Title} - {response.PageTitleSuffix}";
+                : $"{pageMeta.Title} - {response.PageTitleSuffix}";
 
-            var standardizedMetas = siteMeta.Metas.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            var standardizedMetas = pageMeta.Metas.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
             var newPageMeta = new PageMeta(title, standardizedMetas);
 
-            if (siteMeta.CanonicalUrl is object)
+            if (pageMeta.CanonicalUrl is object)
             {
-                newPageMeta.SetCanonicalUrl(siteMeta.CanonicalUrl);
+                newPageMeta.SetCanonicalUrl(pageMeta.CanonicalUrl);
             }
 
             return newPageMeta;

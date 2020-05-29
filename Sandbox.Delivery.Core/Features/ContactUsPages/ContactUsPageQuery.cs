@@ -1,30 +1,17 @@
-﻿using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
-using Sandbox.Delivery.Core.Infrastructure.Documents;
+﻿using Sandbox.Core.Domain.Infrastructure.Operations.Queries;
+using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 
 namespace Sandbox.Delivery.Core.Features.ContactUsPages
 {
-    public class ContactUsPageQuery : IQuerySync<ContactUsPageQueryResponse>
+    public class ContactUsPageQuery : NodeAliasPathQuery, IQuerySync<ContactUsPageQueryResponse>
     {
-        public ContactUsPageQuery(string nodeAliasPath) => NodeAliasPath = nodeAliasPath ?? "";
-
-        public string NodeAliasPath { get; }
+        public ContactUsPageQuery(string nodeAliasPath) : base(nodeAliasPath) { }
     }
 
-    public class ContactUsPageQueryResponse : IPageMetaSource
+    public class ContactUsPageQueryResponse
     {
-        public ContactUsPageQueryResponse(
-            string headerText,
-            string pageMetaTitle,
-            string pageMetaDescription)
-        {
-            HeaderText = headerText ?? "";
-            PageMetaTitle = pageMetaTitle ?? "";
-            PageMetaDescription = pageMetaDescription ?? "";
-        }
+        public ContactUsPageQueryResponse(string headerText) => HeaderText = headerText ?? "";
 
-        public int DocumentId { get; }
         public string HeaderText { get; }
-        public string PageMetaTitle { get; }
-        public string PageMetaDescription { get; }
     }
 }

@@ -17,7 +17,7 @@ namespace Sandbox.Delivery.Data.Features.HomePages
 
         public Result<HomePageQueryResponse> Execute(HomePageQuery query)
         {
-            var result = GetFirstPageWithNodeAliasPath(HomePageProvider.GetHomePages(), query.NodeAliasPath);
+            var result = GetFirstPageWithNodeAliasPath(HomePageProvider.GetHomePages(), query);
 
             if (result.IsFailure)
             {
@@ -29,9 +29,7 @@ namespace Sandbox.Delivery.Data.Features.HomePages
             return Result.Success(new HomePageQueryResponse(
                 node.Fields.HeaderText,
                 node.Fields.FooterTitle,
-                node.Fields.FooterText,
-                node.DocumentPageTitle,
-                node.DocumentPageDescription));
+                node.Fields.FooterText));
         }
 
         public string[] DependencyKeys(HomePageQuery query, Result<HomePageQueryResponse> result) =>

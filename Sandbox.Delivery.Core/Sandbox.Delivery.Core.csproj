@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Sandbox.Core.Domain\Sandbox.Core.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+
 </Project>

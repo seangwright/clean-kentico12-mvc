@@ -1,35 +1,27 @@
-﻿using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
-using Sandbox.Delivery.Core.Infrastructure.Documents;
+﻿using Sandbox.Core.Domain.Infrastructure.Operations.Queries;
+using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 
 namespace Sandbox.Delivery.Core.Features.HomePages
 {
-    public class HomePageQuery : IQuerySync<HomePageQueryResponse>
+    public class HomePageQuery : NodeAliasPathQuery, IQuerySync<HomePageQueryResponse>
     {
-        public HomePageQuery(string nodeAliasPath) => NodeAliasPath = nodeAliasPath ?? "";
-
-        public string NodeAliasPath { get; }
+        public HomePageQuery(string nodeAliasPath) : base(nodeAliasPath) { }
     }
 
-    public class HomePageQueryResponse : IPageMetaSource
+    public class HomePageQueryResponse
     {
         public HomePageQueryResponse(
             string headerText,
             string footerTitle,
-            string footerText,
-            string pageMetaTitle,
-            string pageMetaDescription)
+            string footerText)
         {
             HeaderText = headerText ?? "";
             FooterTitle = footerTitle ?? "";
             FooterText = footerText ?? "";
-            PageMetaTitle = pageMetaTitle ?? "";
-            PageMetaDescription = pageMetaDescription ?? "";
         }
 
         public string HeaderText { get; }
         public string FooterTitle { get; }
         public string FooterText { get; }
-        public string PageMetaTitle { get; }
-        public string PageMetaDescription { get; }
     }
 }

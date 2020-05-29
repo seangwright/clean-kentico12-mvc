@@ -13,7 +13,7 @@ namespace Sandbox.Delivery.Web.Infrastructure.PageMeta
         {
             Guard.Against.Null(SiteMetaService, nameof(SiteMetaService));
 
-            filterContext.Controller.ViewBag.SiteMeta = SiteMetaService.Get();
+            filterContext.Controller.ViewBag.Meta = SiteMetaService.Get();
 
             base.OnActionExecuted(filterContext);
         }
