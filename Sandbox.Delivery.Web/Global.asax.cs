@@ -20,9 +20,9 @@ namespace Sandbox.Delivery.Web
 
             WebApiConfig.ConfigureWebApi(container);
 
-            RouteConfig.RegisterRoutes(RouteTable.Routes, container);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            FilterConfig.RegisterGlobalFilters(FilterProviders.Providers, ValueProviderFactories.Factories, container);
+            FilterConfig.RegisterGlobalFilters(ValueProviderFactories.Factories, container);
         }
     }
 }
