@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac.Integration.Mvc;
 using Kentico.Web.Mvc;
@@ -7,7 +8,7 @@ using Sandbox.Delivery.Web.Configuration.Pipelines;
 
 namespace Sandbox.Delivery.Web
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {

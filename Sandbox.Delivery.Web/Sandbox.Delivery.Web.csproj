@@ -81,6 +81,7 @@
     <Compile Include="Features\ContactUs\ContactUsPageRequestHandler.cs" />
     <Compile Include="Features\Home\HomeController.cs" />
     <Compile Include="Features\Home\HomePageRequestHandler.cs" />
+    <Compile Include="Features\PageMeta\PageMetaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -94,10 +95,9 @@
     <Compile Include="Infrastructure\PageBuilders\PageBuilderInitializer.cs" />
     <Compile Include="Infrastructure\PageBuilders\PreviewContext.cs" />
     <Compile Include="Infrastructure\PageBuilders\PageBuilderInitializerDecorator.cs" />
-    <Compile Include="Infrastructure\PageMeta\PageMetaService.cs" />
-    <Compile Include="Infrastructure\PageMeta\PageMetaStandardizer.cs" />
-    <Compile Include="Infrastructure\PageMeta\PageMeta.cs" />
-    <Compile Include="Infrastructure\PageMeta\PageMetaActionFilterAttribute.cs" />
+    <Compile Include="Features\PageMeta\PageMetaService.cs" />
+    <Compile Include="Features\PageMeta\PageMetaStandardizer.cs" />
+    <Compile Include="Features\PageMeta\PageMeta.cs" />
     <Compile Include="Infrastructure\Requests\BaseController.cs" />
     <Compile Include="Infrastructure\Routing\ControllerActionMatchProvider.cs" />
     <Compile Include="Infrastructure\Routing\ControllerNameExtensions.cs" />
@@ -231,6 +231,7 @@
   <ItemGroup>
     <Folder Include="Content\" />
     <Folder Include="Infrastructure\ErrorHandling\NotFound\" />
+    <Folder Include="Views\PageMeta\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses">

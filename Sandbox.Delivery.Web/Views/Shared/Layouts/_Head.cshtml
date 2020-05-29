@@ -1,9 +1,5 @@
-﻿@using Sandbox.Delivery.Web.Infrastructure.PageMeta
-
-@{
-    var pageMeta = ViewBag.Meta as PageMeta;
-
-    Html.RenderPartial("Layouts/_SiteMeta", pageMeta);
+﻿@{
+    Html.RenderAction("PageMeta", "PageMeta");
     Html.RenderPartial("Layouts/Assets/_PreLoad");
     Html.RenderPartial("Layouts/Assets/_Styles");
 

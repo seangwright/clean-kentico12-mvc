@@ -5,7 +5,7 @@ using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 using Sandbox.Delivery.Core.Features.MarketingTagContents;
 using Sandbox.Delivery.Web.Infrastructure.Contexts;
 
-namespace Sandbox.Delivery.Web.Infrastructure.PageMeta
+namespace Sandbox.Delivery.Web.Features.PageMeta
 {
     public interface IPageMetaStandardizer<TSiteMeta> where TSiteMeta : IPageMeta
     {

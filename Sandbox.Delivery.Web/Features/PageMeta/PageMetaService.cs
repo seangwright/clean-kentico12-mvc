@@ -1,6 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 
-namespace Sandbox.Delivery.Web.Infrastructure.PageMeta
+namespace Sandbox.Delivery.Web.Features.PageMeta
 {
     public interface IPageMetaService<TPageMeta> where TPageMeta : IPageMeta
     {
