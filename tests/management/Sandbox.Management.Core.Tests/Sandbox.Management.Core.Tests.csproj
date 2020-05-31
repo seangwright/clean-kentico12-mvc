@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\management\Sandbox.Management.Core\Sandbox.Management.Core.csproj" />
+  </ItemGroup>
+</Project>
