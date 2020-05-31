@@ -312,7 +312,7 @@
     <Content Include="App_Config\ConnectionStrings.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sandbox.Data.Kentico\Sandbox.Data.Kentico.csproj">
+    <ProjectReference Include="..\..\shared\Sandbox.Data.Kentico\Sandbox.Data.Kentico.csproj">
       <Project>{775FC805-C01C-4D29-B82A-A69EF023415A}</Project>
       <Name>Sandbox.Data.Kentico</Name>
     </ProjectReference>
@@ -320,7 +320,7 @@
       <Project>{DBCAD36B-D161-4350-AAD3-71CAB192E018}</Project>
       <Name>Sandbox.Delivery.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sandbox.Core.Domain\Sandbox.Core.Domain.csproj">
+    <ProjectReference Include="..\..\shared\Sandbox.Core.Domain\Sandbox.Core.Domain.csproj">
       <Project>{40A67BEB-619C-46DF-97EB-55D8D557AE98}</Project>
       <Name>Sandbox.Core.Domain</Name>
     </ProjectReference>

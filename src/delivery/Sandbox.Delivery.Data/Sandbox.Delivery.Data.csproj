@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sandbox.Core.Domain\Sandbox.Core.Domain.csproj" />
-    <ProjectReference Include="..\Sandbox.Data.Kentico\Sandbox.Data.Kentico.csproj" />
+    <ProjectReference Include="..\..\shared\Sandbox.Core.Domain\Sandbox.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\shared\Sandbox.Data.Kentico\Sandbox.Data.Kentico.csproj" />
     <ProjectReference Include="..\Sandbox.Delivery.Core\Sandbox.Delivery.Core.csproj" />
   </ItemGroup>
 

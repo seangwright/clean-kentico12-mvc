@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sandbox.Core.Domain\Sandbox.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\shared\Sandbox.Core.Domain\Sandbox.Core.Domain.csproj" />
   </ItemGroup>
 
 </Project>
