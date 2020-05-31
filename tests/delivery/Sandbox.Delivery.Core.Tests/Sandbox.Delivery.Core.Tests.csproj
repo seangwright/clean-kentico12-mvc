@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\delivery\Sandbox.Delivery.Core\Sandbox.Delivery.Core.csproj" />
+  </ItemGroup>
+</Project>

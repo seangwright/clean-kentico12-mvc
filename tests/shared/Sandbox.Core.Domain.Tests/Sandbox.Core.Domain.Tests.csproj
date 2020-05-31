@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\shared\Sandbox.Core.Domain\Sandbox.Core.Domain.csproj" />
+  </ItemGroup>
+</Project>
