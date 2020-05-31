@@ -7,22 +7,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{13F49F3B-D0B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2BBB6D9D-8D66-4419-AAF4-009D9862F640}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Delivery.Web", "src/delivery/Sandbox.Delivery.Web\Sandbox.Delivery.Web.csproj", "{67E328EF-1643-4D8D-A006-8C67FB969049}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Delivery.Web", "src\delivery\Sandbox.Delivery.Web\Sandbox.Delivery.Web.csproj", "{67E328EF-1643-4D8D-A006-8C67FB969049}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D57C5FA9-AD07-4C7C-AC93-62581B7223D5}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Core.Domain", "src/shared/Sandbox.Core.Domain\Sandbox.Core.Domain.csproj", "{40A67BEB-619C-46DF-97EB-55D8D557AE98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Core.Domain", "src\shared\Sandbox.Core.Domain\Sandbox.Core.Domain.csproj", "{40A67BEB-619C-46DF-97EB-55D8D557AE98}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{5ED2624E-778B-4891-96AC-BFA89B56CD65}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Delivery.Core", "src/delivery/Sandbox.Delivery.Core\Sandbox.Delivery.Core.csproj", "{DBCAD36B-D161-4350-AAD3-71CAB192E018}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Delivery.Core", "src\delivery\Sandbox.Delivery.Core\Sandbox.Delivery.Core.csproj", "{DBCAD36B-D161-4350-AAD3-71CAB192E018}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "delivery", "delivery", "{D6F67BE8-27F6-4255-AD64-347EA6888936}"
 EndProject
@@ -30,13 +31,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "management", "management", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{BC8C9DCA-764E-4A58-82CC-823EB5BE3506}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Data.Kentico", "src/shared/Sandbox.Data.Kentico\Sandbox.Data.Kentico.csproj", "{775FC805-C01C-4D29-B82A-A69EF023415A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Data.Kentico", "src\shared\Sandbox.Data.Kentico\Sandbox.Data.Kentico.csproj", "{775FC805-C01C-4D29-B82A-A69EF023415A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Delivery.Data", "src/delivery/Sandbox.Delivery.Data\Sandbox.Delivery.Data.csproj", "{33DE9864-0254-4C9F-AD26-6239D342CBD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Delivery.Data", "src\delivery\Sandbox.Delivery.Data\Sandbox.Delivery.Data.csproj", "{33DE9864-0254-4C9F-AD26-6239D342CBD5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Data.Management", "src/management/Sandbox.Data.Management\Sandbox.Data.Management.csproj", "{885D2D5B-41D0-4D99-9910-2F6AB875301D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Data.Management", "src\management\Sandbox.Data.Management\Sandbox.Data.Management.csproj", "{885D2D5B-41D0-4D99-9910-2F6AB875301D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Core.Management", "src/management/Sandbox.Core.Management\Sandbox.Core.Management.csproj", "{78049BD7-5E5B-4F17-A9D3-DA52ECA73865}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Core.Management", "src\management\Sandbox.Core.Management\Sandbox.Core.Management.csproj", "{78049BD7-5E5B-4F17-A9D3-DA52ECA73865}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "delivery", "delivery", "{5BF599C7-851D-4615-B8DF-5F4E2D8D807F}"
 EndProject
