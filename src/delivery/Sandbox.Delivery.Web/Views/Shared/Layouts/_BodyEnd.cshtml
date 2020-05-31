@@ -1,0 +1,12 @@
+﻿@{
+    Html.RenderPartial("Layouts/Assets/_Scripts");
+
+    if (IsEditMode)
+    {
+        @Html.Kentico().PageBuilderScripts()
+    }
+    else if (IsLiveMode)
+    {
+        Html.RenderAction("BeforeBodyEnd", "MarketingTags");
+    }
+}

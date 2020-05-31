@@ -1,0 +1,14 @@
+﻿@{
+    Html.RenderAction("PageMeta", "PageMeta");
+    Html.RenderPartial("Layouts/Assets/_PreLoad");
+    Html.RenderPartial("Layouts/Assets/_Styles");
+
+    if (IsEditMode)
+    {
+        @Html.Kentico().PageBuilderStyles()
+    }
+    else if (IsLiveMode)
+    {
+        Html.RenderAction("Header", "MarketingTags");
+    }
+}
