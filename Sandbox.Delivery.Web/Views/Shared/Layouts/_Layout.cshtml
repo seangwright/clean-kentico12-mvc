@@ -7,27 +7,17 @@
     @RenderSection("styles", required: false)
 </head>
 <body>
-    @{ Html.RenderPartial("Layouts/_BodyStart"); }
-
-    @{ Html.RenderAction("Primary", "Navigation"); }
+    @{
+        Html.RenderPartial("Layouts/_BodyStart");
+        Html.RenderAction("Primary", "Navigation");
+    }
 
     @RenderBody()
 
-    @{ Html.RenderAction("Footer", "Navigation"); }
-
-    @{ Html.RenderPartial("Layouts/_BodyEnd"); }
-
-    @{ Html.RenderPartial("Assets/_Scripts"); }
-
-
-    @if (Context.IsEditMode())
-    {
-        @Html.Kentico().PageBuilderScripts()
-    }
-
-    @if (!Context.IsEditMode())
-    {
-        @Html.Raw(marketingTags.BeforeBodyEndTags)
+    @{
+        Html.RenderAction("Footer", "Navigation");
+        Html.RenderPartial("Assets/_Scripts");
+        Html.RenderPartial("Layouts/_BodyEnd");
     }
 
     @RenderSection("scripts", required: false)

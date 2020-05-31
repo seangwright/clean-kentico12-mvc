@@ -11,7 +11,7 @@ namespace Sandbox.Delivery.Web.Infrastructure.PageBuilders
         void Initialize(int documentId);
     }
 
-    public class HttpContextPageBuilderInitializer : IPageBuilderInitializer
+    public class PageBuilderInitializer : IPageBuilderInitializer
     {
         public void Initialize(TreeNode treeNode) =>
             HttpContext.Current.Kentico().PageBuilder().Initialize(treeNode.DocumentID);

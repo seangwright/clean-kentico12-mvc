@@ -14,8 +14,8 @@ namespace Sandbox.Delivery.Web.Configuration.Dependencies
             var container = builder
                 .RegisterApplicationTypes()
                 .RegisterMvcTypes()
-                //.RegisterCmsTypes()
-                //.RegisterApiTypes()
+                .RegisterKenticoTypes()
+                .RegisterAPITypes()
                 .Build();
 
             return container;
