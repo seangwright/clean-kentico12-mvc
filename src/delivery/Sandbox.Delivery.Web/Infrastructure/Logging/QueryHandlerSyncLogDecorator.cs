@@ -17,21 +17,14 @@ namespace Sandbox.Delivery.Web.Infrastructure.Logging
             this.handler = handler;
         }
 
-        public Result<TResponse> Execute(TQuery query)
-        {
-            var result = handler.Execute(query);
-
-            if (result.IsFailure)
-            {
-                EventLogProvider.LogEvent(new EventLogInfo
+        public Result<TResponse> Execute(TQuery query) =>
+            handler
+                .Execute(query)
+                .OnFailure(error => EventLogProvider.LogEvent(new EventLogInfo
                 {
                     EventCode = "Error",
-                    EventDescription = result.Error,
+                    EventDescription = error,
                     EventType = query.GetType().Name,
-                });
-            }
-
-            return result;
-        }
+                }));
     }
 }
