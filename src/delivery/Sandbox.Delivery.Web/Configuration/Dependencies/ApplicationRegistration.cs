@@ -9,7 +9,7 @@ using Sandbox.Core.Domain.Intrastructure.Operations.Factories;
 using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 using Sandbox.Delivery.Data.Features.HomePages;
 using Sandbox.Delivery.Web.Infrastructure.Caching;
-using Sandbox.Delivery.Web.Infrastructure.Contexts;
+using Sandbox.Delivery.Web.Infrastructure.Core;
 using Sandbox.Delivery.Web.Infrastructure.PageBuilders;
 
 namespace Sandbox.Delivery.Web.Configuration.Dependencies

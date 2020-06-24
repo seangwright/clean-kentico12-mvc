@@ -1,7 +1,7 @@
 ﻿
 using static CMS.SiteProvider.SiteContext;
 
-namespace Sandbox.Delivery.Web.Infrastructure.Contexts
+namespace Sandbox.Delivery.Web.Infrastructure.Core
 {
     public interface ISiteContext
     {
