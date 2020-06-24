@@ -36,13 +36,18 @@ Provide a source for architectural guidance and discussion for the Kentico Xperi
 
 ## High Level Patterns
 
+- Vertical Slices / Feature Focused
 - Thin Controllers
-- Request/Handler/ViewModel
+- Request -> Handler -> ViewModel
+- CQRS - Query -> Dispatcher -> Handler -> Response
 - `Result<T>` and `Option<T>` (no `null`)
 - Dependency Injection
 - Cross-Cutting Concerns via Decoration
 - `NodeAliasPath` routing
+- Centralized and type-safe Kentico / Output Caching
 - Context Abstractions
+- Guard Clauses
+- Onion Architecture
 
 ## How to Use this Repository
 
