@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using CSharpFunctionalExtensions;
 using MediatR;
-using Sandbox.Delivery.Web.Infrastructure.Contexts;
+using Sandbox.Delivery.Web.Infrastructure.Core;
 
 namespace Sandbox.Delivery.Web.Infrastructure.PageBuilders
 {

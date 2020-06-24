@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace Sandbox.Delivery.Web.Infrastructure.Contexts
+namespace Sandbox.Delivery.Web.Infrastructure.Core
 {
     public interface IHttpContextBaseAccessor
     {

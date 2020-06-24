@@ -4,7 +4,7 @@ using System.Globalization;
 using Autofac;
 using Sandbox.Data.Kentico.Infrastructure.Caching;
 using Sandbox.Delivery.Web.Infrastructure.Caching;
-using Sandbox.Delivery.Web.Infrastructure.Contexts;
+using Sandbox.Delivery.Web.Infrastructure.Core;
 using Sandbox.Delivery.Web.Infrastructure.PageBuilders;
 
 namespace Sandbox.Delivery.Web.Configuration.Dependencies

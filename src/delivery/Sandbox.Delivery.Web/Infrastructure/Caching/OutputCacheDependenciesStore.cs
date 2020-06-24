@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ardalis.GuardClauses;
 using Sandbox.Data.Kentico.Infrastructure.Caching;
-using Sandbox.Delivery.Web.Infrastructure.Contexts;
+using Sandbox.Delivery.Web.Infrastructure.Core;
 
 namespace Sandbox.Delivery.Web.Infrastructure.Caching
 {
