@@ -1,12 +1,9 @@
-﻿@{
-    Html.RenderPartial("Layouts/Assets/_Scripts");
+﻿<partial name="Layouts/Assets/_Scripts" />
 
-    if (IsEditMode)
-    {
-        @Html.Kentico().PageBuilderScripts()
-    }
-    else if (IsLiveMode)
-    {
-        Html.RenderAction("BeforeBodyEnd", "MarketingTags");
-    }
-}
+<page-builder-mode mode="Edit">
+    @Html.Kentico().PageBuilderScripts()
+</page-builder-mode>
+
+<page-builder-mode mode="Live">
+    <vc:marketing-tags area="BeforeBodyEnd"></vc:marketing-tags>
+</page-builder-mode>

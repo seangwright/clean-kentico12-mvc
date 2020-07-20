@@ -1,0 +1,39 @@
+﻿@using Kentico.PageBuilder.Web.Mvc
+@using Kentico.Web.Mvc
+@using Sandbox.Delivery.Web.Views.Shared.ViewHelpers 
+@using Sandbox.Delivery.Web.Features.PageMetas
+
+@model PageMeta
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+@if (Context.Kentico().PageBuilder().EditMode)
+{
+    return;
+}
+
+<title>@Model.Title</title>
+
+@if (!string.IsNullOrWhiteSpace(Model.CanonicalUrl))
+{
+    <link rel="canonical" href="@Model.CanonicalUrl" />
+}
+
+@foreach (var meta in Model.Metas)
+{
+    if (string.IsNullOrWhiteSpace(meta.Value))
+    {
+        continue;
+    }
+
+    if (meta.Key == PageMeta.OpenGraphImageUrl)
+    {
+        <meta name="@meta.Key" content="@Url.AbsoluteContent(meta.Value)" />
+    }
+    else
+    {
+        <meta name="@meta.Key" content="@meta.Value" />
+    }
+}

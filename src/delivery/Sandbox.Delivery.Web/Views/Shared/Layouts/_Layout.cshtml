@@ -1,24 +1,21 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    @{ Html.RenderPartial("Layouts/_Head"); }
+    <partial name="Layouts/_Head" />
 
     @RenderSection("styles", required: false)
 </head>
 <body>
-    @{
-        Html.RenderPartial("Layouts/_BodyStart");
-        Html.RenderAction("Primary", "Navigation");
-    }
+    <partial name="Layouts/_BodyStart" />
+
+    <vc:header-nav></vc:header-nav>
 
     @RenderBody()
 
-    @{
-        Html.RenderAction("Footer", "Navigation");
-        Html.RenderPartial("Assets/_Scripts");
-        Html.RenderPartial("Layouts/_BodyEnd");
-    }
+    <vc:footer-nav></vc:footer-nav>
+
+    <partial name="Assets/_Scripts" />
+    <partial name="Layouts/_BodyEnd" />
 
     @RenderSection("scripts", required: false)
 </body>

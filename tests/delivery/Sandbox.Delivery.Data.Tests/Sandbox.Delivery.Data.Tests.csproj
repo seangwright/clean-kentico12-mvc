@@ -2,4 +2,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\delivery\Sandbox.Delivery.Data\Sandbox.Delivery.Data.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="Autofixture" Version="4.12.0" />
+    <PackageReference Update="AutoFixture.Idioms" Version="4.12.0" />
+  </ItemGroup>
 </Project>

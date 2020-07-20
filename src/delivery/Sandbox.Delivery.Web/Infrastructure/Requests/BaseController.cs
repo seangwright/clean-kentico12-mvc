@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using System.Web.Mvc;
 using Ardalis.GuardClauses;
 using CSharpFunctionalExtensions;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Sandbox.Delivery.Web.Infrastructure.Requests
 {
@@ -17,11 +17,11 @@ namespace Sandbox.Delivery.Web.Infrastructure.Requests
             Mediator = mediator;
         }
 
-        protected async Task<ActionResult> Process<TRequest, TResponse>(TRequest request)
+        protected async Task<IActionResult> Process<TRequest, TResponse>(TRequest request)
             where TRequest : IRequest<Maybe<TResponse>> =>
             (await Mediator.Send(request))
             .Match<ActionResult, TResponse>(
                 vm => View(vm),
-                () => HttpNotFound());
+                () => NotFound());
     }
 }

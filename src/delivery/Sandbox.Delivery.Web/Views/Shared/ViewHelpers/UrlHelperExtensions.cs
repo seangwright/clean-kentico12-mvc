@@ -1,16 +1,26 @@
 ﻿using System;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Sandbox.Delivery.Web.Views.Shared.ViewHelpers
 {
     public static class UrlHelperExtensions
     {
-        public static string AbsoluteUrl(this UrlHelper urlHelper, string relativeContentPath)
+        /// <summary>
+        /// Generates a fully qualified URL to the specified content by using the specified content path. Converts a
+        /// virtual (relative) path to an application absolute path.
+        /// </summary>
+        /// <param name="url">The URL helper.</param>
+        /// <param name="contentPath">The content path.</param>
+        /// <returns>The absolute URL.</returns>
+        /// <remarks>From https://stackoverflow.com/a/40649583/939634 </remarks>
+        public static string AbsoluteContent(
+            this IUrlHelper url,
+            string contentPath)
         {
-            var url = new Uri(HttpContext.Current.Request.Url, urlHelper.Content(relativeContentPath));
+            var request = url.ActionContext.HttpContext.Request;
 
-            return url.AbsoluteUri;
+            return new Uri(new Uri(request.Scheme + "://" + request.Host.Value), url.Content(contentPath)).ToString();
         }
+
     }
 }

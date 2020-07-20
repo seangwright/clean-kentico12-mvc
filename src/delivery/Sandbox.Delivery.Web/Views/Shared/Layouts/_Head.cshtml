@@ -1,14 +1,13 @@
-﻿@{
-    Html.RenderAction("PageMeta", "PageMeta");
-    Html.RenderPartial("Layouts/Assets/_PreLoad");
-    Html.RenderPartial("Layouts/Assets/_Styles");
+﻿<vc:page-meta></vc:page-meta>
 
-    if (IsEditMode)
-    {
-        @Html.Kentico().PageBuilderStyles()
-    }
-    else if (IsLiveMode)
-    {
-        Html.RenderAction("Header", "MarketingTags");
-    }
-}
+<partial name="Layouts/Assets/_PreLoad" />
+
+<partial name="Layouts/Assets/_Styles" />
+
+<page-builder-mode mode="Edit">
+    @Html.Kentico().PageBuilderStyles()
+</page-builder-mode>
+
+<page-builder-mode mode="Live">
+    <vc:marketing-tags area="Header"></vc:marketing-tags>
+</page-builder-mode>

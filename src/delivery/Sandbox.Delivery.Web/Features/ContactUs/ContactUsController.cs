@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using CMS.DocumentEngine.Types.Sandbox;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Sandbox.Delivery.Web.Infrastructure.Requests;
 
 namespace Sandbox.Delivery.Web.Features.ContactUs
@@ -11,9 +12,10 @@ namespace Sandbox.Delivery.Web.Features.ContactUs
     {
         public ContactUsController(IMediator mediator) : base(mediator) { }
 
-        [AcceptVerbs(HttpVerbs.Head | HttpVerbs.Get)]
+        [HttpGet]
+        [HttpHead]
         [PageTypeRoute(ContactUsPage.CLASS_NAME)]
-        public Task<ActionResult> ContactUs(string requestPath) =>
+        public Task<IActionResult> ContactUs(string requestPath) =>
             Process<ContactUsPageRequest, ContactUsPageViewModel>(new ContactUsPageRequest(requestPath));
     }
 }
