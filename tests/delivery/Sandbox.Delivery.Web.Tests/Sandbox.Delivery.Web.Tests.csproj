@@ -1,4 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Sandbox.Delivery.Web.Tests</RootNamespace>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\delivery\Sandbox.Delivery.Web\Sandbox.Delivery.Web.csproj" />
   </ItemGroup>

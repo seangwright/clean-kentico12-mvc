@@ -77,7 +77,7 @@ namespace Sandbox.Delivery.Web.Configuration
         private readonly string adminUrl;
 
         public AdminRedirectRewriteRule() =>
-            adminUrl = Service.Resolve<IAppSettingsService>()["DancingGoatAdminUrl"] ?? string.Empty;
+            adminUrl = Service.Resolve<IAppSettingsService>()["AdminUrl"] ?? string.Empty;
 
         public void ApplyRule(RewriteContext context)
         {

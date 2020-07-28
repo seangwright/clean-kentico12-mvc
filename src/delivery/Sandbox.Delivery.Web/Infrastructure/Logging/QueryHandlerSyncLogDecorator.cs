@@ -22,7 +22,7 @@ namespace Sandbox.Delivery.Web.Infrastructure.Logging
                 .Execute(query)
                 .OnFailure(error => EventLogProvider.LogEvent(new EventLogInfo
                 {
-                    EventCode = "Error",
+                    EventCode = "Content Delivery Query Error",
                     EventDescription = error,
                     EventType = query.GetType().Name,
                 }));

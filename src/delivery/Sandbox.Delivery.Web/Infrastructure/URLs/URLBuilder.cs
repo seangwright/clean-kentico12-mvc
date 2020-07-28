@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Web;
-using System.Web.Mvc;
 using Ardalis.GuardClauses;
 using CMS.DocumentEngine;
+using Microsoft.AspNetCore.Mvc;
 using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 using Sandbox.Delivery.Core.Features.Nodes;
 using Sandbox.Delivery.Web.Infrastructure.Routing;
@@ -19,18 +18,19 @@ namespace Sandbox.Delivery.Web.Infrastructure.URLs
     public class URLBuilder : IURLBuilder
     {
         private readonly IQueryDispatcher queryDispatcher;
+        private readonly IUrlHelper urlHelper;
 
-        public URLBuilder(IQueryDispatcher queryDispatcher)
+        public URLBuilder(IQueryDispatcher queryDispatcher, IUrlHelper urlHelper)
         {
             Guard.Against.Null(queryDispatcher, nameof(queryDispatcher));
+            Guard.Against.Null(urlHelper, nameof(urlHelper));
 
             this.queryDispatcher = queryDispatcher;
+            this.urlHelper = urlHelper;
         }
 
         public string BuildMVCURL<T>(Func<T, string> nameofAction, object parameters = null) where T : Controller
         {
-            var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
-
             string controllerName = typeof(T).RemoveControllerSuffix();
             string actionName = nameofAction(default);
 

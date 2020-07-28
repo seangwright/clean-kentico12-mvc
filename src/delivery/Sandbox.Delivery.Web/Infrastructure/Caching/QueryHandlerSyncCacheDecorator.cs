@@ -10,23 +10,19 @@ namespace Sandbox.Delivery.Web.Infrastructure.Caching
     public class QueryHandlerSyncCacheDecorator<TQuery, TResponse> : IQueryHandlerSync<TQuery, TResponse>
         where TQuery : IQuerySync<TResponse>
     {
-        private readonly IOutputCacheDependenciesStore cacheKeyStore;
         private readonly ICacheHelper cacheHelper;
         private readonly QueryCacheSettings queryCacheSettings;
         private readonly IQueryHandlerSync<TQuery, TResponse> handler;
 
         public QueryHandlerSyncCacheDecorator(
-            IOutputCacheDependenciesStore cacheKeyStore,
             ICacheHelper cacheHelper,
             QueryCacheSettings queryCacheSettings,
             IQueryHandlerSync<TQuery, TResponse> handler)
         {
-            Guard.Against.Null(cacheKeyStore, nameof(cacheKeyStore));
             Guard.Against.Null(queryCacheSettings, nameof(queryCacheSettings));
             Guard.Against.Null(handler, nameof(handler));
             Guard.Against.Null(cacheHelper, nameof(cacheHelper));
 
-            this.cacheKeyStore = cacheKeyStore;
             this.cacheHelper = cacheHelper;
             this.queryCacheSettings = queryCacheSettings;
             this.handler = handler;
@@ -57,13 +53,7 @@ namespace Sandbox.Delivery.Web.Infrastructure.Caching
                      if (cs.Cached)
                      {
                          cs.GetCacheDependency = () =>
-                         {
-                             string[] cacheKeys = cacheKeysCreator.DependencyKeys(query, result);
-
-                             cacheKeyStore.AddDependencyOnKeys(cacheKeys);
-
-                             return cacheHelper.GetCacheDependency(cacheKeys);
-                         };
+                            cacheHelper.GetCacheDependency(cacheKeysCreator.DependencyKeys(query, result));
                      }
 
                      return result;

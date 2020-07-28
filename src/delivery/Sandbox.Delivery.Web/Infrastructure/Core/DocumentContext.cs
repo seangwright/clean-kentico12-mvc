@@ -1,4 +1,7 @@
 ﻿using System;
+using Ardalis.GuardClauses;
+using CMS.DocumentEngine;
+using Kentico.Content.Web.Mvc;
 
 namespace Sandbox.Delivery.Web.Infrastructure.Core
 {
@@ -12,46 +15,31 @@ namespace Sandbox.Delivery.Web.Infrastructure.Core
         string DocumentClassName { get; }
         string DocumentPageTitle { get; }
         string DocumentPageDescription { get; }
+        bool IsContextInitialized { get; }
     }
 
     public class DocumentContext : IDocumentContext
     {
-        public Guid NodeGuid { get; private set; }
-        public int NodeId { get; private set; }
-        public string NodeAliasPath { get; private set; }
-        public int DocumentId { get; private set; }
-        public string DocumentName { get; private set; }
-        public string DocumentClassName { get; private set; }
-        public string DocumentPageTitle { get; private set; }
-        public string DocumentPageDescription { get; private set; }
+        private readonly IPageDataContextRetriever retriever;
 
-        public DocumentContext()
-        {
-            NodeAliasPath = "";
-            DocumentName = "";
-            DocumentClassName = "";
-            DocumentPageTitle = "";
-            DocumentPageDescription = "";
-        }
+        public Guid NodeGuid => Page.NodeGUID;
+        public int NodeId => Page.NodeID;
+        public string NodeAliasPath => Page.NodeAliasPath;
+        public int DocumentId => Page.DocumentID;
+        public string DocumentName => Page.DocumentName;
+        public string DocumentClassName => Page.NodeClassName;
+        public string DocumentPageTitle => Metadata.Title;
+        public string DocumentPageDescription => Metadata.Description;
+        public bool IsContextInitialized => Page is object;
 
-        public void SetContext(
-            Guid nodeGuid,
-            int nodeId,
-            string nodeAliasPath,
-            int documentId,
-            string documentName,
-            string documentClassName,
-            string documentPageTitle,
-            string documentPageDescription)
+        private TreeNode Page => retriever.Retrieve<TreeNode>()?.Page;
+        private PageMetadata Metadata => retriever.Retrieve<TreeNode>()?.Metadata;
+
+        public DocumentContext(IPageDataContextRetriever retriever)
         {
-            NodeGuid = nodeGuid;
-            NodeId = nodeId;
-            NodeAliasPath = nodeAliasPath ?? "";
-            DocumentId = documentId;
-            DocumentName = documentName ?? "";
-            DocumentClassName = documentClassName ?? "";
-            DocumentPageTitle = documentPageTitle;
-            DocumentPageDescription = documentPageDescription;
+            Guard.Against.Null(retriever, nameof(retriever));
+
+            this.retriever = retriever;
         }
     }
 }

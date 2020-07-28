@@ -1,10 +1,11 @@
 ﻿using System.Configuration;
 using CMS.DataEngine;
 using CMS.Helpers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace System.Web.Mvc
 {
-    public class DynamicOutputCacheAttribute : OutputCacheAttribute
+    public class DynamicOutputCacheAttribute : ResponseCacheAttribute
     {
         public static class SettingsKeys
         {
@@ -16,16 +17,16 @@ namespace System.Web.Mvc
 
         public DynamicOutputCacheAttribute() : base()
         {
-            bool isOutputCacheEnabled = ValidationHelper.GetBoolean(ConfigurationManager.AppSettings["cache:output:is-enabled"], false);
+            bool isOutputCacheEnabled = ValidationHelper.GetBoolean(ConfigurationManager.AppSettings["cache:response-cache:is-enabled"], false);
 
             if (!isOutputCacheEnabled)
             {
-                CacheProfile = "Disabled";
+                CacheProfileName = "Disabled";
 
                 return;
             }
 
-            CacheProfile = "Default";
+            CacheProfileName = "Default";
 
             bool isOverrideEnabled = SettingsKeyInfoProvider.GetBoolValue(SettingsKeys.SANDBOX_OUTPUT_CACHE_OVERRIDE_IS_ENABLED);
 
@@ -38,7 +39,7 @@ namespace System.Web.Mvc
 
             if (!string.IsNullOrEmpty(profileSettingValue))
             {
-                CacheProfile = profileSettingValue;
+                CacheProfileName = profileSettingValue;
             }
 
             int durationSettingValue = SettingsKeyInfoProvider.GetIntValue(SettingsKeys.SANDBOX_OUTPUT_CACHE_DURATION);

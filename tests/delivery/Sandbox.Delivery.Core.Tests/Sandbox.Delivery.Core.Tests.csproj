@@ -1,4 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Sandbox.Delivery.Core.Tests</RootNamespace>
+  </PropertyGroup>
+    
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\delivery\Sandbox.Delivery.Core\Sandbox.Delivery.Core.csproj" />
   </ItemGroup>

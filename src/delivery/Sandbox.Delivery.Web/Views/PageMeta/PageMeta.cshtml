@@ -14,19 +14,9 @@
 <title>@Model.Title</title>
 
 @{
-    string canonicalUrl = "";
-    string pageMainUrl = Url.Kentico().PageMainUrl();
-
-    if (!string.IsNullOrWhiteSpace(Model.CanonicalUrl))
-    {
-        canonicalUrl = Model.CanonicalUrl;
-    }
-    else if (!string.IsNullOrWhiteSpace(pageMainUrl))
-    {
-        string requestAuthority = Url.RequestContext.HttpContext.Request.Url.GetLeftPart(UriPartial.Authority);
-
-        canonicalUrl = requestAuthority + Url.Content(pageMainUrl);
-    }
+    string canonicalUrl = string.IsNullOrWhiteSpace(Model.CanonicalUrl)
+        ? ""
+        : Model.CanonicalUrl;
 }
 
 @if (!string.IsNullOrWhiteSpace(canonicalUrl))
@@ -43,7 +33,7 @@
 
     if (meta.Key == PageMeta.OpenGraphImageUrl)
     {
-        <meta name="@meta.Key" content="@Url.AbsoluteUrl(meta.Value)" />
+        <meta name="@meta.Key" content="@Url.AbsoluteContent(meta.Value)" />
     }
     else
     {

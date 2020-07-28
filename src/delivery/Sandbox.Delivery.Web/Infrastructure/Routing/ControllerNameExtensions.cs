@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Web.Mvc;
 using Ardalis.GuardClauses;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Sandbox.Delivery.Web.Infrastructure.Routing
 {
@@ -15,7 +15,7 @@ namespace Sandbox.Delivery.Web.Infrastructure.Routing
         {
             Guard.Against.Null(controllerType, nameof(controllerType));
 
-            if (!typeof(Controller).IsAssignableFrom(controllerType))
+            if (!typeof(ControllerBase).IsAssignableFrom(controllerType))
             {
                 throw new ArgumentException($"Type [{controllerType.Name}] is not assignable from [{nameof(Controller)}]");
             }

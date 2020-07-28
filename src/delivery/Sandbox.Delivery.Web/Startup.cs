@@ -9,6 +9,7 @@ namespace Sandbox.Delivery.Web
     {
         public void ConfigureServices(IServiceCollection services) => services
             .AddAppKentico()
+            .AddResponseCaching()
             .AddAppRoutes()
             .AddAppAuth(LocalizationConfig.DEFAULT_CULTURE)
             .AddAppMvc()
@@ -19,6 +20,7 @@ namespace Sandbox.Delivery.Web
             .UseAppKentico()
             .UseStaticFiles()
             .UseRouting()
+            .UseResponseCaching()
             .UseAppLocalization()
             .UseCors()
             .UseAuthentication()

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using CMS.DocumentEngine.Types.Sandbox;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Sandbox.Delivery.Web.Infrastructure.Requests;
 
 namespace Sandbox.Delivery.Web.Features.Home
@@ -11,9 +11,9 @@ namespace Sandbox.Delivery.Web.Features.Home
     {
         public HomeController(IMediator mediator) : base(mediator) { }
 
-        [AcceptVerbs(HttpVerbs.Head | HttpVerbs.Get)]
-        [PageTypeRoute("CMS.Root", HomePage.CLASS_NAME)]
-        public Task<ActionResult> Home(string requestPath) =>
+        [HttpHead]
+        [HttpGet]
+        public Task<IActionResult> Home(string requestPath) =>
             Process<HomePageRequest, HomePageViewModel>(new HomePageRequest(requestPath));
     }
 }
