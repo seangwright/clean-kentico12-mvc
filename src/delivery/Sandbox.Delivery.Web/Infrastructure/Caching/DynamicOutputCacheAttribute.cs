@@ -1,9 +1,8 @@
 ﻿using System.Configuration;
 using CMS.DataEngine;
 using CMS.Helpers;
-using Microsoft.AspNetCore.Mvc;
 
-namespace System.Web.Mvc
+namespace Microsoft.AspNetCore.Mvc
 {
     public class DynamicOutputCacheAttribute : ResponseCacheAttribute
     {

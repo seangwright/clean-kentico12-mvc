@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using CMS.DocumentEngine.Types.Sandbox;
 using CSharpFunctionalExtensions;
@@ -12,8 +13,8 @@ using static Sandbox.Data.Kentico.Infrastructure.Queries.ContextCacheKeysCreator
 namespace Sandbox.Delivery.Data.Features.MarketingTagsContents
 {
     public class MarketingTagsContentQueryHandler :
-        IQueryHandlerSync<MarketingTagsContentQuery, MarketingTagsQueryResponse>,
-        IQuerySyncCacheKeysCreator<MarketingTagsContentQuery, MarketingTagsQueryResponse>
+        IQueryHandler<MarketingTagsContentQuery, MarketingTagsQueryResponse>,
+        IQueryCacheKeysCreator<MarketingTagsContentQuery, MarketingTagsQueryResponse>
     {
         private readonly IDocumentQueryContext context;
 
@@ -24,9 +25,9 @@ namespace Sandbox.Delivery.Data.Features.MarketingTagsContents
             this.context = context;
         }
 
-        public Result<MarketingTagsQueryResponse> Execute(MarketingTagsContentQuery query)
+        public async Task<Result<MarketingTagsQueryResponse>> Execute(MarketingTagsContentQuery query, CancellationToken token)
         {
-            var content = MarketingTagsContentProvider.GetMarketingTagsContents()
+            var response = await MarketingTagsContentProvider.GetMarketingTagsContents()
                 .LatestVersion(context.IsPreviewEnabled)
                 .Published(!context.IsPreviewEnabled)
                 .OnSite(context.SiteName)
@@ -41,22 +42,21 @@ namespace Sandbox.Delivery.Data.Features.MarketingTagsContents
                     nameof(MarketingTagsContent.MarketingTagsContentDefaultTwitterSite)
                 )
                 .TopN(1)
-                .TypedResult
-                .FirstOrDefault();
+                .SelectSingle(content => new MarketingTagsQueryResponse(
+                    content.Fields.HeaderTags,
+                    content.Fields.AfterBodyStartTags,
+                    content.Fields.BeforeBodyEndTags,
+                    content.Fields.PageTitleSuffix,
+                    content.Fields.DefaultPageDescription,
+                    content.Fields.DefaultOpenGraphImageUrl,
+                    content.Fields.DefaultTwitterSite), token);
 
-            if (content is null)
+            if (response is null)
             {
                 return Result.Failure<MarketingTagsQueryResponse>($"Could not find any {nameof(MarketingTagsContent)} documents");
             }
 
-            return Result.Success(new MarketingTagsQueryResponse(
-                content.Fields.HeaderTags,
-                content.Fields.AfterBodyStartTags,
-                content.Fields.BeforeBodyEndTags,
-                content.Fields.PageTitleSuffix,
-                content.Fields.DefaultPageDescription,
-                content.Fields.DefaultOpenGraphImageUrl,
-                content.Fields.DefaultTwitterSite));
+            return Result.Success(response);
         }
 
         public string[] DependencyKeys(MarketingTagsContentQuery query, Result<MarketingTagsQueryResponse> result) =>

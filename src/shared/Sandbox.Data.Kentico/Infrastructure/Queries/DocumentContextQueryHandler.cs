@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using CMS.DocumentEngine;
 using CSharpFunctionalExtensions;
@@ -26,13 +27,13 @@ namespace Sandbox.Data.Kentico.Infrastructure.Queries
         /// <param name="documentQuery"></param>
         /// <param name="nodeAliasPath"></param>
         /// <returns></returns>
-        protected Result<TDocument> GetFirstPageWithNodeAliasPath(DocumentQuery<TDocument> documentQuery, NodeAliasPathQuery query)
+        protected async Task<Result<TDocument>> GetFirstPageWithNodeAliasPath(DocumentQuery<TDocument> documentQuery, NodeAliasPathQuery query, CancellationToken token)
         {
-            var page = documentQuery
+            var page = await documentQuery
                 .GetLatestSiteDocuments(Context)
                 .Path(query.NodeAliasPath, PathTypeEnum.Explicit)
                 .TopN(1)
-                .FirstOrDefault();
+                .FirstOrDefault(token);
 
             if (page is null)
             {

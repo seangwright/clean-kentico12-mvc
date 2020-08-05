@@ -1,4 +1,6 @@
-﻿using Ardalis.GuardClauses;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
@@ -6,7 +8,7 @@ using Sandbox.Delivery.Core.Features.HomePages;
 
 namespace Sandbox.Delivery.Web.Features.Home
 {
-    public class HomePageRequestHandler : RequestHandler<HomePageRequest, Maybe<HomePageViewModel>>
+    public class HomePageRequestHandler : IRequestHandler<HomePageRequest, Maybe<HomePageViewModel>>
     {
         private readonly IQueryDispatcher dispatcher;
 
@@ -17,9 +19,9 @@ namespace Sandbox.Delivery.Web.Features.Home
             this.dispatcher = dispatcher;
         }
 
-        protected override Maybe<HomePageViewModel> Handle(HomePageRequest request)
+        public async Task<Maybe<HomePageViewModel>> Handle(HomePageRequest request, CancellationToken cancellationToken)
         {
-            var result = dispatcher.Dispatch(new HomePageQuery(request.RequestPath));
+            var result = await dispatcher.Dispatch(new HomePageQuery(request.RequestPath), cancellationToken);
 
             if (result.IsFailure)
             {

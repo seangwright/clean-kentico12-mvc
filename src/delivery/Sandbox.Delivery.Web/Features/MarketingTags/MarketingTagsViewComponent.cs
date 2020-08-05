@@ -1,4 +1,6 @@
-﻿using Ardalis.GuardClauses;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Mvc;
 using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 using Sandbox.Delivery.Core.Features.MarketingTagsContents;
@@ -16,9 +18,9 @@ namespace Sandbox.Delivery.Web.Features.MarketingTags
             this.dispatcher = dispatcher;
         }
 
-        public IViewComponentResult Invoke(string area)
+        public async Task<IViewComponentResult> InvokeAsync(string area, CancellationToken cancellationToken)
         {
-            var result = dispatcher.Dispatch(new MarketingTagsContentQuery());
+            var result = await dispatcher.Dispatch(new MarketingTagsContentQuery(), cancellationToken);
 
             if (result.IsFailure)
             {

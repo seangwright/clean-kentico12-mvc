@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using CMS.DocumentEngine;
 using CSharpFunctionalExtensions;
@@ -12,8 +14,8 @@ using static Sandbox.Data.Kentico.Infrastructure.Queries.ContextCacheKeysCreator
 namespace Sandbox.Delivery.Data.Features.Nodes
 {
     public class NodeAliasPathByNodeGuidQueryHandler :
-        IQueryHandlerSync<NodeAliasPathByNodeGuidQuery, string>,
-        IQuerySyncCacheKeysCreator<NodeAliasPathByNodeGuidQuery, string>
+        IQueryHandler<NodeAliasPathByNodeGuidQuery, string>,
+        IQueryCacheKeysCreator<NodeAliasPathByNodeGuidQuery, string>
     {
         private readonly IDocumentQueryContext context;
 
@@ -24,15 +26,14 @@ namespace Sandbox.Delivery.Data.Features.Nodes
             this.context = context;
         }
 
-        public Result<string> Execute(NodeAliasPathByNodeGuidQuery query)
+        public async Task<Result<string>> Execute(NodeAliasPathByNodeGuidQuery query, CancellationToken token)
         {
-            var node = DocumentHelper
+            var node = await DocumentHelper
                 .GetDocuments()
                 .GetLatestSiteDocuments(context)
                 .WhereEquals(nameof(TreeNode.NodeGUID), query.NodeGuid)
                 .TopN(1)
-                .TypedResult
-                .FirstOrDefault();
+                .FirstOrDefault(token);
 
             if (node is null)
             {

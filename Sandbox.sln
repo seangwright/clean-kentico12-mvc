@@ -6,8 +6,11 @@ MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{13F49F3B-D0BE-4683-B162-D747D08B9C3F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2BBB6D9D-8D66-4419-AAF4-009D9862F640}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Directory.Build.props = tests\Directory.Build.props
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Delivery.Web", "src\delivery\Sandbox.Delivery.Web\Sandbox.Delivery.Web.csproj", "{67E328EF-1643-4D8D-A006-8C67FB969049}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Delivery.Web", "src\delivery\Sandbox.Delivery.Web\Sandbox.Delivery.Web.csproj", "{67E328EF-1643-4D8D-A006-8C67FB969049}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D57C5FA9-AD07-4C7C-AC93-62581B7223D5}"
 	ProjectSection(SolutionItems) = preProject

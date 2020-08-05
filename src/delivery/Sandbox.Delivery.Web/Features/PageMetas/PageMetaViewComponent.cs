@@ -1,4 +1,6 @@
-﻿using Ardalis.GuardClauses;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Sandbox.Delivery.Web.Features.PageMetas
@@ -14,6 +16,6 @@ namespace Sandbox.Delivery.Web.Features.PageMetas
             this.metaService = metaService;
         }
 
-        public IViewComponentResult Invoke() => View(metaService.Get());
+        public async Task<IViewComponentResult> InvokeAsync(CancellationToken token) => View(await metaService.Get(token));
     }
 }

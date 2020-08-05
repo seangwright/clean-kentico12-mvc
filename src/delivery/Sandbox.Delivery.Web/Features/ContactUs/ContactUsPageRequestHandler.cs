@@ -1,4 +1,6 @@
-﻿using Ardalis.GuardClauses;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
@@ -6,7 +8,7 @@ using Sandbox.Delivery.Core.Features.ContactUsPages;
 
 namespace Sandbox.Delivery.Web.Features.ContactUs
 {
-    public class ContactUsPageRequestHandler : RequestHandler<ContactUsPageRequest, Maybe<ContactUsPageViewModel>>
+    public class ContactUsPageRequestHandler : IRequestHandler<ContactUsPageRequest, Maybe<ContactUsPageViewModel>>
     {
         private readonly IQueryDispatcher dispatcher;
 
@@ -17,9 +19,9 @@ namespace Sandbox.Delivery.Web.Features.ContactUs
             this.dispatcher = dispatcher;
         }
 
-        protected override Maybe<ContactUsPageViewModel> Handle(ContactUsPageRequest request)
+        public async Task<Maybe<ContactUsPageViewModel>> Handle(ContactUsPageRequest request, CancellationToken cancellationToken)
         {
-            var result = dispatcher.Dispatch(new ContactUsPageQuery(request.RequestPath));
+            var result = await dispatcher.Dispatch(new ContactUsPageQuery(request.RequestPath), cancellationToken);
 
             if (result.IsFailure)
             {
