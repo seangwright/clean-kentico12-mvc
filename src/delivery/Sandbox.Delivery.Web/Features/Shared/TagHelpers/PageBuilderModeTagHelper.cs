@@ -2,7 +2,7 @@
 using Kentico.PageBuilder.Web.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace Sandbox.Delivery.Web.Views.Shared.TagHelpers
+namespace Sandbox.Delivery.Web.Features.Shared.TagHelpers
 {
     public class PageBuilderModeTagHelper : TagHelper
     {

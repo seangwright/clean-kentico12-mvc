@@ -33,7 +33,7 @@ namespace CMS.DocumentEngine.Types.Sandbox
         /// <summary>
         /// The name of the data class.
         /// </summary>
-        public const string CLASS_NAME = "Sandbox.HomePage";
+        public const string CLASS_NAME = "DancingGoatCore.Home"; //"Sandbox.HomePage";
 
 
         /// <summary>

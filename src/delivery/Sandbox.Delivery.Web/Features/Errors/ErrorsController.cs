@@ -1,10 +1,9 @@
 ﻿using System.Diagnostics;
-using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Sandbox.Delivery.Web.Infrastructure.ErrorHandling
+namespace Sandbox.Delivery.Web.Features.Errors
 {
     [ApiController]
     [Route("error")]
@@ -16,31 +15,22 @@ namespace Sandbox.Delivery.Web.Infrastructure.ErrorHandling
 
     [AllowAnonymous]
     [Route("error")]
-    public class ErrorController : Controller
+    public class ErrorsController : Controller
     {
-        private readonly IExceptionHandlerPathFeature feature;
-
-        public ErrorController(IExceptionHandlerPathFeature feature)
-        {
-            Guard.Against.Null(feature, nameof(feature));
-
-            this.feature = feature;
-        }
-
         [Route("401")]
-        public IActionResult Error401() => View(BuildModel());
+        public IActionResult NotAuthenticated() => View(BuildModel());
         [Route("403")]
-        public IActionResult Error403() => View(BuildModel());
+        public IActionResult NotAuthorized() => View(BuildModel());
         [Route("404")]
-        public IActionResult Error404() => View(BuildModel());
+        public IActionResult PageNotFound() => View(BuildModel());
         [Route("500")]
-        public IActionResult Error500() => View(BuildModel());
+        public IActionResult ServerError() => View(BuildModel());
 
 
         private ErrorViewModel BuildModel() => new ErrorViewModel
         {
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-            RequestPath = feature.Path
+            RequestPath = HttpContext.Features.Get<IExceptionHandlerPathFeature>()?.Path ?? ""
         };
     }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Sandbox.Delivery.Web.Views.Shared.ViewHelpers
+namespace Sandbox.Delivery.Web.Features.Shared.ViewHelpers
 {
     public static class UrlHelperExtensions
     {

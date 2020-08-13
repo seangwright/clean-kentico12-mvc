@@ -3,7 +3,7 @@ using Kentico.PageBuilder.Web.Mvc;
 using Kentico.Web.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 
-namespace Sandbox.Delivery.Web.Views.Shared
+namespace Sandbox.Delivery.Web.Features.Shared
 {
     public enum PageBuilderMode
     {

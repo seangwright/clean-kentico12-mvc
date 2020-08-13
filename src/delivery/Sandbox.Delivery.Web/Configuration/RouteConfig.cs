@@ -46,7 +46,7 @@ namespace Sandbox.Delivery.Web.Configuration
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: AddCulturePrefix(defaultCulture, "{controller:slugify=Home}/{action:slugify=Index}/{id?}"));
+                    pattern: AddCulturePrefix(defaultCulture, "{controller:slugify=Home}/{action:slugify=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "error",
