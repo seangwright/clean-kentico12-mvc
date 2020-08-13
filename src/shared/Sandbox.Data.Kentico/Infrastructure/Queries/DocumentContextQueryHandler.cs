@@ -8,8 +8,7 @@ using static Sandbox.Data.Kentico.Infrastructure.Queries.ContextCacheKeysCreator
 
 namespace Sandbox.Data.Kentico.Infrastructure.Queries
 {
-    public abstract class DocumentContextQueryHandler<TDocument>
-        where TDocument : TreeNode, new()
+    public abstract class DocumentContextQueryHandler
     {
         protected readonly IDocumentQueryContext Context;
 
@@ -27,7 +26,8 @@ namespace Sandbox.Data.Kentico.Infrastructure.Queries
         /// <param name="documentQuery"></param>
         /// <param name="nodeAliasPath"></param>
         /// <returns></returns>
-        protected async Task<Result<TDocument>> GetFirstPageWithNodeAliasPath(DocumentQuery<TDocument> documentQuery, NodeAliasPathQuery query, CancellationToken token)
+        protected async Task<Result<TDocument>> GetFirstPageWithNodeAliasPath<TDocument>(DocumentQuery<TDocument> documentQuery, NodeAliasPathQuery query, CancellationToken token)
+            where TDocument : TreeNode, new()
         {
             var page = await documentQuery
                 .GetLatestSiteDocuments(Context)

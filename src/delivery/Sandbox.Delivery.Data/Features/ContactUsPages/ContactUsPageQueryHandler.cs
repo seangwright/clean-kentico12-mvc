@@ -9,7 +9,7 @@ using Sandbox.Delivery.Core.Features.ContactUsPages;
 
 namespace Sandbox.Delivery.Data.Features.ContactUsPages
 {
-    public class ContactUsPageQueryHandler : DocumentContextQueryHandler<ContactUsPage>,
+    public class ContactUsPageQueryHandler : DocumentContextQueryHandler,
         IQueryHandler<ContactUsPageQuery, ContactUsPageQueryResponse>,
         IQueryCacheKeysCreator<ContactUsPageQuery, ContactUsPageQueryResponse>
     {

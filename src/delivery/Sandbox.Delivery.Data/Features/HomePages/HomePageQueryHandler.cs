@@ -1,5 +1,7 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using CMS.DocumentEngine;
 using CMS.DocumentEngine.Types.Sandbox;
 using CSharpFunctionalExtensions;
 using FluentCacheKeys;
@@ -9,7 +11,7 @@ using Sandbox.Delivery.Core.Features.HomePages;
 
 namespace Sandbox.Delivery.Data.Features.HomePages
 {
-    public class HomePageQueryHandler : DocumentContextQueryHandler<HomePage>,
+    public class HomePageQueryHandler : DocumentContextQueryHandler,
         IQueryHandler<HomePageQuery, HomePageQueryResponse>,
         IQueryCacheKeysCreator<HomePageQuery, HomePageQueryResponse>
     {
@@ -17,7 +19,15 @@ namespace Sandbox.Delivery.Data.Features.HomePages
 
         public async Task<Result<HomePageQueryResponse>> Execute(HomePageQuery query, CancellationToken token)
         {
-            var result = await GetFirstPageWithNodeAliasPath(HomePageProvider.GetHomePages(), query, token);
+            //var result = await GetFirstPageWithNodeAliasPath(HomePageProvider.GetHomePages(), query, token);
+
+            var p = HomePageProvider.GetHomePages()
+                .GetLatestSiteDocuments(Context)
+                .Path(query.NodeAliasPath, PathTypeEnum.Explicit)
+                .TopN(1)
+                .FirstOrDefault();
+
+            var result = p is null ? Result.Failure<HomePage>("") : Result.Success(p);
 
             if (result.IsFailure)
             {
