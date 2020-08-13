@@ -3,7 +3,7 @@ using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 
 namespace Sandbox.Delivery.Core.Features.HomePages
 {
-    public class HomePageQuery : NodeAliasPathQuery, IQuerySync<HomePageQueryResponse>
+    public class HomePageQuery : NodeAliasPathQuery, IQuery<HomePageQueryResponse>
     {
         public HomePageQuery(string nodeAliasPath) : base(nodeAliasPath) { }
     }

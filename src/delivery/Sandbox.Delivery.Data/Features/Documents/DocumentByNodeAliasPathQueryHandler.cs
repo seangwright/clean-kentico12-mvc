@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using CMS.DocumentEngine;
 using CSharpFunctionalExtensions;
@@ -12,8 +14,8 @@ using static Sandbox.Data.Kentico.Infrastructure.Queries.ContextCacheKeysCreator
 namespace Sandbox.Delivery.Data.Features.Documents
 {
     public class DocumentByNodeAliasPathQueryHandler :
-        IQueryHandlerSync<DocumentByNodeAliasPathQuery, DocumentQueryResponse>,
-        IQuerySyncCacheKeysCreator<DocumentByNodeAliasPathQuery, DocumentQueryResponse>
+        IQueryHandler<DocumentByNodeAliasPathQuery, DocumentQueryResponse>,
+        IQueryCacheKeysCreator<DocumentByNodeAliasPathQuery, DocumentQueryResponse>
     {
         private readonly IDocumentQueryContext context;
 
@@ -24,9 +26,9 @@ namespace Sandbox.Delivery.Data.Features.Documents
             this.context = context;
         }
 
-        public Result<DocumentQueryResponse> Execute(DocumentByNodeAliasPathQuery query)
+        public async Task<Result<DocumentQueryResponse>> Execute(DocumentByNodeAliasPathQuery query, CancellationToken token)
         {
-            var response = DocumentHelper.GetDocuments()
+            var response = (await DocumentHelper.GetDocuments()
                 .LatestVersion(context.IsPreviewEnabled)
                 .Published(!context.IsPreviewEnabled)
                 .OnSite(context.SiteName)
@@ -43,7 +45,7 @@ namespace Sandbox.Delivery.Data.Features.Documents
                     nameof(TreeNode.DocumentPageTitle),
                     nameof(TreeNode.DocumentPageDescription)
                 )
-                .TypedResult
+                .GetEnumerableTypedResultAsync(cancellationToken: token))
                 .Select(n => new DocumentQueryResponse(
                     n.NodeGUID,
                     n.NodeID,

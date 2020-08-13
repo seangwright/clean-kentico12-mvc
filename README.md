@@ -1,8 +1,14 @@
 # Clean Kentico12 MVC
 
-An example of Clean/Onion Architecture with Kentico 12 MVC
+An example of Clean/Onion Architecture with [Kentico Xperience 13](https://docs.kentico.com/13)
 
 ## Repository Structure
+
+This repository uses the standard .NET approach of a mono-repo, with multiple projects, and deployable units, all contained in a single solution.
+
+There are two deployable units in a Kentico Xperience 13 application, the Content Management (ASP.NET 4.8 Web Forms) application and the Content Delivery (ASP.NET Core 3.1 MVC) application.
+
+In the directory structure below, we can see the separation of these deployable units by top level folders, `delivery`, `management`, with `shared` container projects shared between both deployable units.
 
 ```bash
 📦/
@@ -13,7 +19,7 @@ An example of Clean/Onion Architecture with Kentico 12 MVC
  ┃ ┃ ┣ 📜Sandbox.Delivery.Data (Kentico data access)
  ┃ ┃ ┗ 📜Sandbox.Delivery.Web (MVC / Web API)
  ┃ ┣ 📂management
- ┃ ┃ ┣ 📜Sandbox.Management.Core (Coe abstractions / POCOs)
+ ┃ ┃ ┣ 📜Sandbox.Management.Core (Core abstractions / POCOs for CM)
  ┃ ┃ ┣ 📜Sandbox.Management.Data (Kentico data access)
  ┃ ┃ ┗ 📜Sandbox.Management.Web (CMS not included)
  ┃ ┣ 📂shared
@@ -63,3 +69,17 @@ Optional: Connect the repository to a Kentico Xperience CMS (`Sandbox.Management
 - [.NET Junkie](https://blogs.cuttingedge.it/steven/posts/2019/di-composition-models-primer/) - Steven van Deursen
 - [ploeh blog](https://blog.ploeh.dk/2015/10/26/service-locator-violates-encapsulation/) - Mark Seeman
 - [Los Techies](https://lostechies.com/jimmybogard/2016/10/27/cqrsmediatr-implementation-patterns/) - Jimmy Bogard
+
+## TODO
+
+- [ ] Xperience 13 built-in Dynamic Routing
+- [ ] Robust error handling for MVC, Razor Pages, and APIs
+- [ ] Demo of Widget/Section architecture
+- [ ] Demo of Page Template architecture
+- [X] Layout / meta tag infrastructure
+- [X] Query caching as cross cutting decorator
+- [ ] Robust logging patterns applied via decoration
+- [X] Xperience Async data querying
+- [ ] Xperience 13 built-in route URL generation
+- [ ] Demo of External Auth
+- [ ] Demo of client rendered UI integration w/ API

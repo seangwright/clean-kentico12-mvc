@@ -3,7 +3,7 @@ using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 
 namespace Sandbox.Delivery.Core.Features.ContactUsPages
 {
-    public class ContactUsPageQuery : NodeAliasPathQuery, IQuerySync<ContactUsPageQueryResponse>
+    public class ContactUsPageQuery : NodeAliasPathQuery, IQuery<ContactUsPageQueryResponse>
     {
         public ContactUsPageQuery(string nodeAliasPath) : base(nodeAliasPath) { }
     }

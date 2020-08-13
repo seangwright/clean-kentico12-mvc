@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using CMS.DocumentEngine;
 using Microsoft.AspNetCore.Mvc;
@@ -11,8 +13,8 @@ namespace Sandbox.Delivery.Web.Infrastructure.URLs
     public interface IURLBuilder
     {
         string BuildMVCURL<T>(Func<T, string> nameofAction, object parameters = null) where T : Controller;
-        string BuildNodeAliasPathURL(Guid nodeGuid);
-        string BuildNodeAliasPathURL(TreeNode node);
+        Task<string> BuildNodeAliasPathURL(Guid nodeGuid, CancellationToken token);
+        Task<string> BuildNodeAliasPathURL(TreeNode node, CancellationToken token);
     }
 
     public class URLBuilder : IURLBuilder
@@ -37,20 +39,17 @@ namespace Sandbox.Delivery.Web.Infrastructure.URLs
             return urlHelper.Action(actionName, controllerName, parameters);
         }
 
-        public string BuildNodeAliasPathURL(Guid nodeGuid) => GetNodeAliasPathForNodeGuid(nodeGuid);
+        public Task<string> BuildNodeAliasPathURL(Guid nodeGuid, CancellationToken token) => GetNodeAliasPathForNodeGuid(nodeGuid, token);
 
-        public string BuildNodeAliasPathURL(TreeNode node) => GetNodeAliasPathForNodeGuid(node.NodeGUID);
+        public Task<string> BuildNodeAliasPathURL(TreeNode node, CancellationToken token) => GetNodeAliasPathForNodeGuid(node.NodeGUID, token);
 
-        private string GetNodeAliasPathForNodeGuid(Guid nodeGuid)
+        private async Task<string> GetNodeAliasPathForNodeGuid(Guid nodeGuid, CancellationToken token)
         {
-            var result = queryDispatcher.Dispatch(new NodeAliasPathByNodeGuidQuery(nodeGuid));
+            var result = (await queryDispatcher.Dispatch(new NodeAliasPathByNodeGuidQuery(nodeGuid), token));
 
-            if (result.IsFailure)
-            {
-                return "";
-            }
-
-            return result.Value.ToLowerInvariant();
+            return result.IsFailure
+                ? ""
+                : result.Value.ToLowerInvariant();
         }
     }
 }

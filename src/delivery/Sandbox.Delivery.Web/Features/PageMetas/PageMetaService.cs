@@ -1,10 +1,12 @@
-﻿using Ardalis.GuardClauses;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 
 namespace Sandbox.Delivery.Web.Features.PageMetas
 {
     public interface IPageMetaService<TPageMeta> where TPageMeta : IPageMeta
     {
-        TPageMeta Get();
+        Task<TPageMeta> Get(CancellationToken token);
         void Set(TPageMeta siteMeta);
     }
 
@@ -30,7 +32,7 @@ namespace Sandbox.Delivery.Web.Features.PageMetas
             this.siteMetaStandardizer = siteMetaStandardizer;
         }
 
-        public TPageMeta Get() => siteMetaStandardizer.Standardize(currentPageMeta)
+        public Task<TPageMeta> Get(CancellationToken token) => siteMetaStandardizer.Standardize(currentPageMeta, token)
 ;
         public void Set(TPageMeta siteMeta)
         {

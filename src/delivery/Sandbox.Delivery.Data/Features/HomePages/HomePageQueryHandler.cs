@@ -1,4 +1,6 @@
-﻿using CMS.DocumentEngine.Types.Sandbox;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using CMS.DocumentEngine.Types.Sandbox;
 using CSharpFunctionalExtensions;
 using FluentCacheKeys;
 using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
@@ -8,14 +10,14 @@ using Sandbox.Delivery.Core.Features.HomePages;
 namespace Sandbox.Delivery.Data.Features.HomePages
 {
     public class HomePageQueryHandler : DocumentContextQueryHandler<HomePage>,
-        IQueryHandlerSync<HomePageQuery, HomePageQueryResponse>,
-        IQuerySyncCacheKeysCreator<HomePageQuery, HomePageQueryResponse>
+        IQueryHandler<HomePageQuery, HomePageQueryResponse>,
+        IQueryCacheKeysCreator<HomePageQuery, HomePageQueryResponse>
     {
         public HomePageQueryHandler(IDocumentQueryContext context) : base(context) { }
 
-        public Result<HomePageQueryResponse> Execute(HomePageQuery query)
+        public async Task<Result<HomePageQueryResponse>> Execute(HomePageQuery query, CancellationToken token)
         {
-            var result = GetFirstPageWithNodeAliasPath(HomePageProvider.GetHomePages(), query);
+            var result = await GetFirstPageWithNodeAliasPath(HomePageProvider.GetHomePages(), query, token);
 
             if (result.IsFailure)
             {

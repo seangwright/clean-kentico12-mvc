@@ -1,4 +1,6 @@
-﻿using CMS.DocumentEngine.Types.Sandbox;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using CMS.DocumentEngine.Types.Sandbox;
 using CSharpFunctionalExtensions;
 using FluentCacheKeys;
 using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
@@ -8,14 +10,14 @@ using Sandbox.Delivery.Core.Features.ContactUsPages;
 namespace Sandbox.Delivery.Data.Features.ContactUsPages
 {
     public class ContactUsPageQueryHandler : DocumentContextQueryHandler<ContactUsPage>,
-        IQueryHandlerSync<ContactUsPageQuery, ContactUsPageQueryResponse>,
-        IQuerySyncCacheKeysCreator<ContactUsPageQuery, ContactUsPageQueryResponse>
+        IQueryHandler<ContactUsPageQuery, ContactUsPageQueryResponse>,
+        IQueryCacheKeysCreator<ContactUsPageQuery, ContactUsPageQueryResponse>
     {
         public ContactUsPageQueryHandler(IDocumentQueryContext context) : base(context) { }
 
-        public Result<ContactUsPageQueryResponse> Execute(ContactUsPageQuery query)
+        public async Task<Result<ContactUsPageQueryResponse>> Execute(ContactUsPageQuery query, CancellationToken token)
         {
-            var result = GetFirstPageWithNodeAliasPath(ContactUsPageProvider.GetContactUsPages(), query);
+            var result = await GetFirstPageWithNodeAliasPath(ContactUsPageProvider.GetContactUsPages(), query, token);
 
             if (result.IsFailure)
             {

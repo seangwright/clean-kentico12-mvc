@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 using Sandbox.Delivery.Core.Features.MarketingTagsContents;
@@ -9,7 +11,7 @@ namespace Sandbox.Delivery.Web.Features.PageMetas
 {
     public interface IPageMetaStandardizer<TSiteMeta> where TSiteMeta : IPageMeta
     {
-        TSiteMeta Standardize(TSiteMeta pageMeta);
+        Task<TSiteMeta> Standardize(TSiteMeta pageMeta, CancellationToken token);
     }
 
     public class PageMetaStandardizer : IPageMetaStandardizer<PageMeta>
@@ -26,7 +28,7 @@ namespace Sandbox.Delivery.Web.Features.PageMetas
             this.context = context;
         }
 
-        public PageMeta Standardize(PageMeta pageMeta)
+        public async Task<PageMeta> Standardize(PageMeta pageMeta, CancellationToken token)
         {
             if (pageMeta is null)
             {
@@ -34,7 +36,7 @@ namespace Sandbox.Delivery.Web.Features.PageMetas
                 pageMeta.SetDescription(context.DocumentPageDescription);
             }
 
-            var result = dispatcher.Dispatch(new MarketingTagsContentQuery());
+            var result = await dispatcher.Dispatch(new MarketingTagsContentQuery(), token);
 
             if (result.IsFailure)
             {

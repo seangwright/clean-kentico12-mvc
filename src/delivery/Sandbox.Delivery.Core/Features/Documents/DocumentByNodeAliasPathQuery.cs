@@ -3,7 +3,7 @@ using Sandbox.Core.Domain.Intrastructure.Operations.Queries;
 
 namespace Sandbox.Delivery.Core.Features.Documents
 {
-    public class DocumentByNodeAliasPathQuery : IQuerySync<DocumentQueryResponse>
+    public class DocumentByNodeAliasPathQuery : IQuery<DocumentQueryResponse>
     {
         public DocumentByNodeAliasPathQuery(string nodeAliasPath) => NodeAliasPath = nodeAliasPath ?? "";
 

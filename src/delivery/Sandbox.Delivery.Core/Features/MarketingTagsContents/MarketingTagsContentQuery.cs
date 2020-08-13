@@ -2,7 +2,7 @@
 
 namespace Sandbox.Delivery.Core.Features.MarketingTagsContents
 {
-    public class MarketingTagsContentQuery : IQuerySync<MarketingTagsQueryResponse>
+    public class MarketingTagsContentQuery : IQuery<MarketingTagsQueryResponse>
     {
     }
 
